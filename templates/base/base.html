@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>PSYQUIA</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="{% static "libs/bootstrap/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<link rel="icon" href="{% static 'img/favicon.ico' %}">
+	{% block contenido_head %}
+
+	{% endblock %}
+</head>
+<body class="d-flex flex-column" style="display: flex;
+  flex-direction: column;
+  min-height: 100vh;">
+	{% include 'base/navbar.html' %}
+	{% block contenido_body %}
+
+	{% endblock %}
+
+	{% include 'base/footer.html' %}
+	<!-- Bootstrap & JQuery -->
+	<script src="{% static "libs/jquery/jquery-3.4.1.min.js" %}"></script>
+	<script src="{% static "libs/bootstrap/js/bootstrap.min.js" %}"></script>
+</body>
+</html>

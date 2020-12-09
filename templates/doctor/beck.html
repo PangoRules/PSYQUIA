@@ -1,0 +1,308 @@
+{% extends "base/baselogged.html" %}
+{% load static %}
+	
+{% block contenido_head %}
+	<!--<link rel="stylesheet" href="{% static 'css/main/home.css' %}">-->
+{% endblock %}
+
+{% block contenido_body %}
+    <div class="container mt-5">
+        <div class="card">
+            <h5 class="card-header text-center">Formulario BECK</h5>
+            <div class="card-body">
+                <form action="">
+                <h2>Datos Generales</h2>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="nivel_economico">Nivel Económico</label>
+                            <select id="nivel_economico" name="nivel_economico" class="form-control">
+                                <option selected></option>
+                                <option>Alto</option>
+                                <option>Medio Alto</option>
+                                <option>Medio</option>
+                                <option>Medio Bajo</option>
+                                <option>Bajo</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="profesion">Profesión</label>
+                            <input type="text" class="form-control" placeholder="Ingeniero" name="profesion" id="profesion">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="escolaridad">Grado máximo de estudios alcanzado</label>
+                            <select id="escolaridad" name="escolaridad" class="form-control">
+                                <option selected></option>
+                                <option>No Estudio</option>
+                                <option>Preescolar</option>
+                                <option>Primaria</option>
+                                <option>Secundaria</option>
+                                <option>Media Superior</option>
+                                <option>Superior</option>
+                                <option>Posgrado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="edo_civil">Estado Civil</label>
+                            <select id="edo_civil" name="edo_civil" class="form-control">
+                                <option selected></option>
+                                <option>Soltero</option>
+                                <option>Casado</option>
+                                <option>Union Libre</option>
+                                <option>Divorciado</option>
+                                <option>Separado</option>
+                                <option>Viudo</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="sexo">Sexo</label>
+                            <select id="sexo" name="sexo" class="form-control">
+                                <option selected></option>
+                                <option>Hombre</option>
+                                <option>Mujer</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="edad">Edad</label>
+                            <input type="number" class="form-control" name="edad" id="edad">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="religion">Religión</label>
+                            <select id="religion" name="religion" class="form-control">
+                                <option selected></option>
+                                <option>Católico</option>
+                                <option>Cristiano</option>
+                                <option>Agnóstico</option>
+                                <option>Ateo</option>
+                                <option>Otro..</option>
+                            </select>
+                        </div>
+                    </div>
+                <h2>Datos Especificos</h2>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="tristeza">Tristeza</label>
+                            <select id="tristeza" name="tristeza" class="form-control">
+                                <option selected></option>
+                                <option>No me siento triste.</option>
+                                <option>Me siento triste gran parte del tiempo.</option>
+                                <option>Me siento triste todo el tiempo.</option>
+                                <option>Me siento tan triste o soy tan infeliz que no puedo soportarlo.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pesimismo">Pesimismo</label>
+                            <select id="pesimismo" name="pesimismo" class="form-control">
+                                <option selected></option>
+                                <option>No estoy desalentado respecto del mi futuro.</option>
+                                <option>Me siento más desalentado respecto de mi futuro que lo que solía estarlo.</option>
+                                <option>No espero que las cosas funcionen para mi.</option>
+                                <option>Siento que no hay esperanza para mi futuro y que sólo puede empeora.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="fracaso">Fracaso</label>
+                            <select id="fracaso" name="fracaso" class="form-control">
+                                <option selected></option>
+                                <option>No me siento como un fracasado.</option>
+                                <option>He fracasado más de lo que hubiera debido.</option>
+                                <option>Cuando miro hacia atrás, veo muchos fracasos.</option>
+                                <option>Siento que como persona soy un fracaso total.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="perdida_placer">Pérdida de Placer</label>
+                            <select id="perdida_placer" name="perdida_placer" class="form-control">
+                                <option selected></option>
+                                <option>Obtengo tanto placer como siempre por las cosas de las que disfruto.</option>
+                                <option>No disfruto tanto de las cosas como solía hacerlo.</option>
+                                <option>Obtengo muy poco placer de las cosas que solía disfrutar.</option>
+                                <option>No puedo obtener ningún placer de las cosas de las que solía disfrutar.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sentimiento_culpa">Sentimientos de Culpa</label>
+                            <select id="sentimiento_culpa" name="sentimiento_culpa" class="form-control">
+                                <option selected></option>
+                                <option>No me siento particularmente culpable.</option>
+                                <option>Me siento culpable respecto de varias cosas que he hecho o que debería haber hecho.</option>
+                                <option>Me siento bastante culpable la mayor parte del tiempo.</option>
+                                <option>Me siento culpable todo el tiempo.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sentimiento_castigo">Sentimientos de Castigo</label>
+                            <select id="sentimiento_castigo" name="sentimiento_castigo" class="form-control">
+                                <option selected></option>
+                                <option>No siento que este siendo castigado.</option>
+                                <option>Siento que tal vez pueda ser castigado.</option>
+                                <option>Espero ser castigado.</option>
+                                <option>Siento que estoy siendo castigado.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="disconformidad_unomismo">Disconformidad con uno mismo</label>
+                            <select id="disconformidad_unomismo" name="disconformidad_unomismo" class="form-control">
+                                <option selected></option>
+                                <option>Siento acerca de mi lo mismo que siempre.</option>
+                                <option>He perdido la confianza en mí mismo.</option>
+                                <option>Estoy decepcionado conmigo mismo.</option>
+                                <option>No me gusto a mí mismo.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="autocritica">Autocrítica</label>
+                            <select id="autocritica" name="autocritica" class="form-control">
+                                <option selected></option>
+                                <option>No me critico ni me culpo más de lo habitual.</option>
+                                <option>Estoy más crítico conmigo mismo de lo que solía estarlo.</option>
+                                <option>Me critico a mí mismo por todos mis errores.</option>
+                                <option>Me culpo a mí mismo por todo lo malo que sucede.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="llanto">Llanto</label>
+                            <select id="llanto" name="llanto" class="form-control">
+                                <option selected></option>
+                                <option>No lloro más de lo que solía hacerlo.</option>
+                                <option>Lloro más de lo que solía hacerlo.</option>
+                                <option>Lloro por cualquier pequeñez.</option>
+                                <option>Siento ganas de llorar pero no puedo.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="agitacion">Agitación</label>
+                            <select id="agitacion" name="agitacion" class="form-control">
+                                <option selected></option>
+                                <option>No estoy más inquieto o tenso que lo habitual.</option>
+                                <option>Me siento más inquieto o tenso que lo habitual.</option>
+                                <option>Estoy tan inquieto o agitado que me es difícil quedarme quieto.</option>
+                                <option>Estoy tan inquieto o agitado que tengo que estar siempre en movimiento o haciendo algo.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="perdida_interes">Pérdida de Interés</label>
+                            <select id="perdida_interes" name="perdida_interes" class="form-control">
+                                <option selected></option>
+                                <option>No he perdido el interés en otras actividades o personas.</option>
+                                <option>Estoy menos interesado que antes en otras personas o cosas.</option>
+                                <option>He perdido casi todo el interés en otras personas o cosas.</option>
+                                <option>Me es difícil interesarme por algo.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="indecision">Indecisión</label>
+                            <select id="indecision" name="indecision" class="form-control">
+                                <option selected></option>
+                                <option>Tomo mis propias decisiones tan bien como siempre.</option>
+                                <option>Me resulta más difícil que de costumbre tomar decisiones.</option>
+                                <option>Encuentro mucha más dificultad que antes para tomar decisiones.</option>
+                                <option>Tengo problemas para tomar cualquier decisión.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="desvalorizacion">Desvalorización</label>
+                            <select id="desvalorizacion" name="desvalorizacion" class="form-control">
+                                <option selected></option>
+                                <option>No siento que yo no sea valioso.</option>
+                                <option>No me considero a mi mismo tan valioso y útil como solía considerarme.</option>
+                                <option>Me siento menos valioso cuando me comparo con otros.</option>
+                                <option>Siento que no valgo nada.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="perdida_energia">Pérdida de Energía</label>
+                            <select id="perdida_energia" name="perdida_energia" class="form-control">
+                                <option selected></option>
+                                <option>Tengo tanta energía como siempre.</option>
+                                <option>Tengo menos energía que la que solía tener.</option>
+                                <option>No tengo suficiente energía para hacer demasiado.</option>
+                                <option>No tengo energía suficiente para hacer nada.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cambios_habi_sueños">Cambios en los Hábitos de Sueño</label>
+                            <select id="cambios_habi_sueños" name="cambios_habi_sueños" class="form-control">
+                                <option selected></option>
+                                <option>No he experimentado ningún cambio en mis hábitos de sueño.</option>
+                                <option>Duermo un poco más que lo habitual.</option>
+                                <option>Duermo un poco menos que lo habitual.</option>
+                                <option>Duermo mucho más que lo habitual.</option>
+                                <option>Duermo mucho menos que lo habitual.</option>
+                                <option>Duermo la mayor parte del día.</option>
+                                <option>Me despierto 1-2 horas más temprano y no puedo volver a dormirme .</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="irritabilidad">Irritabilidad</label>
+                            <select id="irritabilidad" name="irritabilidad" class="form-control">
+                                <option selected></option>
+                                <option>No estoy tan irritable que lo habitual.</option>
+                                <option>Estoy más irritable que lo habitual.</option>
+                                <option>Estoy mucho más irritable que lo habitual.</option>
+                                <option>Estoy irritable todo el tiempo.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cambios_apetito">Cambios en el Apetito</label>
+                            <select id="cambios_apetito" name="cambios_apetito" class="form-control">
+                                <option selected></option>
+                                <option>No he experimentado ningún cambio en mi apetito.</option>
+                                <option>Mi apetito es un poco menor que lo habitual.</option>
+                                <option>Mi apetito es un poco mayor que lo habitual.</option>
+                                <option>Mi apetito es mucho menor que antes.</option>
+                                <option>Mi apetito es mucho mayor que lo habitual.</option>
+                                <option>No tengo apetito en absoluto.</option>
+                                <option>Quiero comer todo el día.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="dificultad_concentracion">Dificultad de Concentración</label>
+                            <select id="dificultad_concentracion" name="dificultad_concentracion" class="form-control">
+                                <option selected></option>
+                                <option>Puedo concentrarme tan bien como siempre.</option>
+                                <option>No puedo concentrarme tan bien como habitualmente.</option>
+                                <option>Me es difícil mantener la mente en algo por mucho tiempo.</option>
+                                <option>Encuentro que no puedo concentrarme en nada. </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="cansancio">Cansancio o Fatiga</label>
+                            <select id="cansancio" name="cansancio" class="form-control">
+                                <option selected></option>
+                                <option>No estoy más cansado o fatigado que lo habitual.</option>
+                                <option>Me fatigo o me canso más fácilmente que lo habitual.</option>
+                                <option>Estoy demasiado fatigado o cansado para hacer muchas de las cosas que solía hacer.</option>
+                                <option>Estoy demasiado fatigado o cansado para hacer la mayoría de las cosas que solía hacer.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="perdida_interes_sexo">Pérdida de Interés en el Sexo</label>
+                            <select id="perdida_interes_sexo" name="perdida_interes_sexo" class="form-control">
+                                <option selected></option>
+                                <option>No he notado ningún cambio reciente en mi interés por el sexo.</option>
+                                <option>Estoy menos interesado en el sexo de lo que solía estarlo.</option>
+                                <option>Estoy mucho menos interesado en el sexo.</option>
+                                <option>He perdido completamente el interés en el sexo.</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
