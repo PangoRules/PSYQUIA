@@ -21,4 +21,6 @@ urlpatterns = [
     path('doc/test',views.docTest, name="DocTest"),
     path('doc/becktest',views.docBeck, name="DocBeckTest"),
     path('doc/registrarpaciente',views.docRegPaciente, name="DocRegPac"),
+    path('doc/casos_distimicos', views.docCasoDistimico, name="DocCasoDistimico"),
+    path('doc/casos_depresivos', views.docCasoDepresivo, name="DocCasoDepresivo"),
 ]

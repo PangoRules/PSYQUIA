@@ -14,3 +14,9 @@ def docBeck(request):
 
 def docRegPaciente(request):
 	return render(request, "doctor/registrarpaciente.html")
+
+def docCasoDistimico(request):
+	return render(request, "doctor/casodistimico.html")
+
+def docCasoDepresivo(request):
+	return render(request, "doctor/casodepresivo.html")

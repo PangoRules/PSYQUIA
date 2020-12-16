@@ -6,11 +6,24 @@
 {% endblock %}
 
 {% block contenido_body %}
-    <div class="container mt-5">
-        <div class="card">
+    <div class="container mt-5 mb-5">
+        <div class="card shadow-lg border-0 rounded-lg">
             <h5 class="card-header text-center">Formulario BECK</h5>
             <div class="card-body">
                 <form action="">
+                <h2>Paciente a Diagnosticar</h1>
+                <div class="form-row justify-content-center">
+                    <div class="form-group col-md-12 col-lg-6">
+                        <select id="paciente" name="paciente" class="form-control">
+                                <option selected></option>
+                                <option>Rafael</option>
+                                <option>Ricardo</option>
+                                <option>Estefania</option>
+                                <option>Mohana</option>
+                                <option>Lindsay</option>
+                            </select>
+                    </div>
+                </div>
                 <h2>Datos Generales</h2>
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -298,6 +311,11 @@
                                 <option>Estoy mucho menos interesado en el sexo.</option>
                                 <option>He perdido completamente el interés en el sexo.</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-lg btn-block">Registrar Paciente</button>
                         </div>
                     </div>
                 </form>

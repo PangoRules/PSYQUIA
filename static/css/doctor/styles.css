@@ -1,0 +1,9 @@
+.userimg{
+    height: 20rem;
+}
+
+@media (max-width: 576px){
+    #perfildistimico{
+        margin-top: 1.5rem;
+    }
+}

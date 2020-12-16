@@ -41,13 +41,13 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <div class="small">Nombre del Usuario:</div>
+                        User
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <main>
+                <main class="h-100">
                     {% block contenido_body %}
 
 	                {% endblock %}
@@ -57,9 +57,9 @@
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; PSYQUIA {% now "Y" %}</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="#">Politica de Privacidad</a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="#">Terminos &amp; Condiciones</a>
                             </div>
                         </div>
                     </div>
@@ -80,10 +80,8 @@
         <script src="{% static 'libs/jquery/buttons.flash.min.js' %}" crossorigin="anonymous"></script>
         <script src="{% static 'libs/jquery/buttons.html5.min.js' %}" crossorigin="anonymous"></script>
         <script src="{% static 'libs/jquery/buttons.print.min.js' %}" crossorigin="anonymous"></script>
-        
+        {% block contenido_scripts %}
 
-        <script src="{% static 'js/loggedtemplate/chart-area-demo.js' %}"></script>
-        <script src="{% static 'js/loggedtemplate/chart-bar-demo.js' %}"></script>
-        <script src="{% static 'js/loggedtemplate/datatables-demo.js' %}"></script>
+        {% endblock %}
     </body>
 </html>
