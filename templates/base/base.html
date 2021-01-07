@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="es">
 <head>
 	<title>PSYQUIA</title>
 	<!-- Bootstrap -->
@@ -22,6 +22,10 @@
 	{% include 'base/footer.html' %}
 	<!-- Bootstrap & JQuery -->
 	<script src="{% static "libs/jquery/jquery-3.4.1.min.js" %}"></script>
-	<script src="{% static "libs/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "libs/bootstrap/js/bootstrap.min.js" %}"></script>
+    
+    {% block contenido_scripts %}
+
+    {% endblock %}
 </body>
 </html>

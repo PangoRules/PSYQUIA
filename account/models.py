@@ -30,11 +30,10 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     email           = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    username        = models.CharField(max_length=30, unique=True)
     date_joined     = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login      = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin        = models.BooleanField(default=False)
-    is_active       = models.BooleanField(default=True)
+    is_active       = models.BooleanField(default=False)
     is_staff        = models.BooleanField(default=False)
     is_superuser    = models.BooleanField(default=False)
     nombres         = models.CharField(max_length=50)
@@ -43,7 +42,7 @@ class Account(AbstractBaseUser):
     password        = models.CharField(max_length=15)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELD = ['password']
+    REQUIRED_FIELD = ['password','email']
 
     objects = MyAccountManager()
 
