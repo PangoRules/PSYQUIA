@@ -45,29 +45,43 @@ $('#RegistroForm').on('submit', function(e){
     })
     .then(data => {
         if(data.respuesta==true){
-            console.log("Exito: "+data.respuesta);
+            //console.log("Exito: "+data.respuesta);
             $('#modalExito').modal('toggle');
+            $('#RegistroForm')[0].reset();
         }else{
-            console.log("Fracaso: "+data.respuesta);
+            $('.alert-danger').remove();
+            //console.log("Fracaso: "+data.respuesta);
             for(var error in data.errores){
                 switch(error){
                     case "email":
-                        console.log(data.errores[error]);
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_email').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
                     break;
                     case "nombres":
-                        console.log(data.errores[error]);
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_nombres').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
                     break;
                     case "apellidos":
-                        console.log(data.errores[error]);
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_apellidos').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
                     break;
                     case "cedula":
-                        console.log(data.errores[error]);
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_cedula').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
                     break;
                     case "password1":
-                        console.log(data.errores[error]);
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_password1').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
                     break;
                     case "password2":
-                        console.log(data.errores[error]);
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_password2').after('<div class="alert alert-danger mb-1" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
                     break;
                 }
             }
