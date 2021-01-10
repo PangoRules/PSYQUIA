@@ -6,6 +6,23 @@
 {% endblock %}
 
 {% block contenido_body %}
+<style>
+
+.help {
+        color:#fff;
+        background-color:#feb22a;
+        width:12px;
+        height:12px;
+        display:inline-block;
+        border-radius:100%;
+        font-size:10px;
+        text-align:center;
+        text-decoration:none;
+        -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+        box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    }
+</style>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
@@ -14,41 +31,118 @@
                     <div class="card-body">
                         <form>
                             <div class="form-row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="nombrecompleto">Nombre Completo</label>
-                                        <input class="form-control py-4" id="nombrecompleto" name="nombrecompleto" type="text" placeholder="Escribe tu nombre completo">
+                                        <label class="small mb-1" for="sexo">Sexo</label>
+                                        <select id="sexo" name="sexo" class="form-control">
+                                            <option selected >Mujer</option>
+                                            <option>Hombre</option>
+                                        </select>    
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="small mb-1" for="fechanac">Fecha de Nacimiento</label>
                                         <input class="form-control" type="date" id="fechanac" name="fechanac"
-                                            value="{{ value|date:"Y-m-d" }}"
-                                            min="1000-01-01" max="{{ value|date:"Y-m-d" }}">
+                                        value="{{ value|date:"Y-m-d" }}"
+                                        min="1000-01-01" max="{{ value|date:"Y-m-d" }}">  
                                     </div>
                                 </div>
+                           </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="nombrecompleto">Nombre Completo</label>
+                                        <input class="form-control py-4" id="nombrecompleto" name="nombrecompleto" type="text" placeholder="Escriba el nombre completo del paciente">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="correo">Correo electrónico del paciente</label>
+                                        <input class="form-control py-4" id="correo" type="email" aria-describedby="correo" placeholder="Ingrese la dirección de correo electrónico del paciente">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="profesion">Grado de Estudios Alcanzado</label>
+                                        <label class="small mb-1" for="escolaridad">Ultimo grado de estudios</label>
                                         <select id="escolaridad" name="escolaridad" class="form-control">
-                                            <option selected>No Estudio</option>
-                                            <option>Preescolar</option>
-                                            <option>Primaria</option>
-                                            <option>Secundaria</option>
+                                            <option selected>Sin Estudios</option>
+                                            <option>Secundaria o menor</option>
                                             <option>Media Superior</option>
                                             <option>Superior</option>
                                             <option>Posgrado</option>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="profesion">Ocupación</label >
+                                            <a class="help" href="#">?</a>
+                                        <select id="profesion" name="profesion" class="form-control">
+                                            <option selected>Sin ocupación</option>
+                                            <option>Estudiante</option>
+                                            <option>Amo(a) de casa</option>
+                                            <option>Empleado(a) de empresa</option>
+                                            <option>Oficio o técnico</option>
+                                            <option>Emprendedor(a)</option>
+                                            <option>Profesionista</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               
                             </div>
-                            <div class="form-group">
-                                <label class="small mb-1" for="correo">Correo Electronico</label>
-                                <input class="form-control py-4" id="correo" type="email" aria-describedby="correo" placeholder="Ingrese su dirección de correo electrónico">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="estadocivil">Estado civil</label>
+                                        <select id="estadocivil" name="estadocivil" class="form-control">
+                                            <option selected>Soltero</option>
+                                            <option>Casado</option>
+                                            <option>Unión libre</option>
+                                            <option>Viudo</option>
+                                            <option>Divorciado</option>
+                                            <option>Separado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="religion">Religión</label >
+                                        <select id="religion" name="religion" class="form-control">
+                                            <option selected>Ninguna</option>
+                                            <option>Católico</option>
+                                            <option>Cristiano</option>
+                                            <option>Adventista</option>
+                                            <option>Ateo/Agnóstico</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="economico">Nivel económico</label >
+                                            <select id="economico" name="economico" class="form-control">
+                                                <option value="0" selected>Bajo</option>
+                                                <option value="1" >Medio-bajo</option>
+                                                <option value="2" >Medio</option>
+                                                <option value="3">Medio-alto</option>
+                                                <option value="4">Alto</option>
+                                            </select>
+                                        </div>
+                                </div>
+                           </div>
+                           <div class="form-row">
+                            
+                       </div>
+
                             <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">Registrar Paciente</a></div>
                         </form>
                     </div>
