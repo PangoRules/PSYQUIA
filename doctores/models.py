@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Paciente(models.Model):
     email = models.EmailField(max_length=60, unique=True)
-    birth_date = models.DateTimeField(auto_now_add=True)
+    birth_date = models.DateField()
     sex = models.BooleanField(default=False)
     name = models.CharField(max_length=100)
     study = models.CharField(max_length=100)
