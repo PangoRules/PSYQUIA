@@ -6,55 +6,114 @@
 {% endblock %}
 
 {% block contenido_body %}
-    <div class="container">
+<style>
+
+.help {
+        color:#fff;
+        background-color:#feb22a;
+        width:12px;
+        height:12px;
+        display:inline-block;
+        border-radius:100%;
+        font-size:10px;
+        text-align:center;
+        text-decoration:none;
+        -webkit-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+        box-shadow: inset -1px -1px 1px 0px rgba(0,0,0,0.25);
+    }
+</style>
+    <div class="container mb-4">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Registrar Paciente</h3></div>
                     <div class="card-body">
-                        <form>
+                        <form id="RegistroPacienteForm" action="" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="sexo">Sexo</label>
+                                        {{ form.sex }}  
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="fechanac">Fecha de Nacimiento</label>
+                                        {{ form.birth_date }}   
+                                    </div>
+                                </div>
+                           </div>
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="small mb-1" for="nombrecompleto">Nombre Completo</label>
-                                        <input class="form-control py-4" id="nombrecompleto" name="nombrecompleto" type="text" placeholder="Escribe tu nombre completo">
+                                        {{ form.name }}   
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="correo">Correo electrónico del paciente</label>
+                                        {{ form.email }} 
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="escolaridad">Ultimo grado de estudios</label>
+                                        {{ form.study }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="profesion">Ocupación</label >
+                                            <a class="help" href="#">?</a>
+                                            {{ form.job }} 
+                                    </div>
+                                </div>
+                               
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="fechanac">Fecha de Nacimiento</label>
-                                        <input class="form-control" type="date" id="fechanac" name="fechanac"
-                                            value="{{ value|date:"Y-m-d" }}"
-                                            min="1000-01-01" max="{{ value|date:"Y-m-d" }}">
+                                        <label class="small mb-1" for="estadocivil">Estado civil</label>
+                                        {{ form.civil_state }} 
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="small mb-1" for="profesion">Grado de Estudios Alcanzado</label>
-                                        <select id="escolaridad" name="escolaridad" class="form-control">
-                                            <option selected>No Estudio</option>
-                                            <option>Preescolar</option>
-                                            <option>Primaria</option>
-                                            <option>Secundaria</option>
-                                            <option>Media Superior</option>
-                                            <option>Superior</option>
-                                            <option>Posgrado</option>
-                                        </select>
+                                        <label class="small mb-1" for="religion">Religión</label >
+                                        {{ form.religion }} 
                                     </div>
                                 </div>
+                               
                             </div>
-                            <div class="form-group">
-                                <label class="small mb-1" for="correo">Correo Electronico</label>
-                                <input class="form-control py-4" id="correo" type="email" aria-describedby="correo" placeholder="Ingrese su dirección de correo electrónico">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="economico">Nivel económico</label >
+                                            {{ form.economical_situation }} 
+                                        </div>
+                                </div>
+                           </div>
+                           <div class="form-group mt-4 mb-0">
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Registrar Paciente</button>
                             </div>
-                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">Registrar Paciente</a></div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div>
+        {{form.errors}}
+    </div>
 {% endblock %}
+{% block contenido_scripts %}
 
+{% endblock %}
