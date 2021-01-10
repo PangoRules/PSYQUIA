@@ -20,7 +20,6 @@ def docBeck(request):
 	#Luego filtrar por el id doctor despues del login
 	pacientes = Paciente.objects.values('id','name')
 	if request.method == 'POST':
-		print('entro')
 		model = load_model('keras_models/suicide_ac100_loss2.h5')
 		dataset = pd.read_csv('keras_models/DATASET_SUICIDIO.csv')
 		dataset = dataset.drop(['TESTIGO'],axis=1)
@@ -95,6 +94,12 @@ def docBeck(request):
 		dato=pd.DataFrame(new[0]).T
 		ynew = np.round(model.predict(dato))
 		print(ynew)
+		form = forms.RegistrarTestBeckForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return JsonResponse({'respuesta':True})
+		else:
+			return JsonResponse({'respuesta':False,'errores':dict(form.errors.items())})
 	context = {'form':form,'paciente':pacientes}
 	return render(request, "doctor/beck.html",context)
 
