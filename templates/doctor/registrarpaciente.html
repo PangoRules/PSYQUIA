@@ -7,7 +7,6 @@
 
 {% block contenido_body %}
 <style>
-
 .help {
         color:#fff;
         background-color:#feb22a;
@@ -72,8 +71,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="small mb-1" for="profesion">Ocupación</label >
-                                            <a class="help" href="#">?</a>
-                                            {{ form.job }} 
+                                        <a class="help" href="#.">?</a>
+                                        {{ form.job }} 
                                     </div>
                                 </div>
                                
@@ -110,10 +109,7 @@
             </div>
         </div>
     </div>
-    <div>
-        {{form.errors}}
-    </div>
 {% endblock %}
 {% block contenido_scripts %}
-
+<script type="module" src="{% static 'js/doctor/registropaciente.js' %}"></script>
 {% endblock %}

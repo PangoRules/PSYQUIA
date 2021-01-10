@@ -83,7 +83,22 @@
         </div>
     </div>
 </div>
-
+<!-- Modal Error Crear Cuenta-->
+<div class="modal fade" id="modalError" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal de error" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger d-block text-center">
+                <h5 class="modal-title text-white" id="exampleModalLabel">ERROR!!</h5>
+            </div>
+            <div class="modal-body bg-light">
+                <p class="text-dark text-justify">Lo sentimos ha habido un error al crear su cuenta. Porfavor vuelva a intentarlo.</p>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block contenido_scripts %}

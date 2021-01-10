@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse
 from . import forms
 
 # Create your views here.
@@ -18,10 +18,10 @@ def docRegPaciente(request):
 	if request.method == 'POST':
 		form = forms.RegistrarPacienteForm(request.POST)
 		if form.is_valid():
-			form.save()
-			print('simon')
+			#form.save()
+			return JsonResponse({'respuesta':True})
 		else:
-			print('nomon')
+			return JsonResponse({'respuesta':False,'errores':dict(form.errors.items())})
 	context = {'form':form}
 	return render(request, "doctor/registrarpaciente.html",context)
 
