@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from RedNeuDetecDepre.settings import EMAIL_HOST_USER
 from . import forms
 from django.http import JsonResponse, HttpResponse
+from django.core.mail import send_mail
 
 def iniciar_sesion(request):
     form = forms.LoginForm
@@ -18,7 +20,13 @@ def registrarse(request):
     if request.method == 'POST':
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
-            print(form)
+            print(str(form['email'].value()))
+            send_mail(
+                'Aviso de nuevo usuario',
+                'Favor de revisar el nuevo usuario y activar su cuenta', 
+                EMAIL_HOST_USER, 
+                ['animasdelmundo2@gmail.com'], 
+                fail_silently=False)
             #form.save()
             return JsonResponse({'respuesta':True})
         #Esto sucedera cuando el formulario no sea validado de manera correcta. Falta el else y su respectivo bloque de codigo 
