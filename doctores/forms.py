@@ -43,18 +43,29 @@ concentracion = (('0', 'Puedo concentrarme tan bien como siempre.'),('1', 'No pu
 fatiga = (('0', 'No estoy más cansado o fatigado que lo habitual.'),('1', 'Me fatigo o me canso más fácilmente que lo habitual.'),('2', 'Estoy demasiado fatigado o cansado para hacer muchas de las cosas que solía hacer.'),('3', 'Estoy demasiado fatigado o cansado para hacer la mayoría de las cosas que solía hacer.'),)
 sexo = (('0', 'No he notado ningún cambio reciente en mi interés por el sexo.'),('1', 'Estoy menos interesado en el sexo de lo que solía estarlo.'),('2', 'Estoy mucho menos interesado en el sexo.'),('3', 'He perdido completamente el interés en el sexo.'),)
 
-"""
+
 class RegistrarTestBeckForm(forms.ModelForm):
-    id_paciente = forms.EmailField(max_length=60, required=True,help_text='Requerido. Agregue una dirección de correo válida', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'Correo Electronico'}))
-    birth_date = forms.CharField(required=True,help_text='Requerido. Agregue una fecha válida', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Fecha de nacimiento'}))
-    sex = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
-    name = forms.CharField(max_length=60, required=True, help_text='Seleccione una opción por favor',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Nombre del paciente'}))
-    study = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=estudio)
-    job = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=ocupacion)
-    civil_state = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=civil)
-    religion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=religionChoices)
-    economical_situation = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=situacion)
+    id_paciente = forms.IntegerField(required=True,help_text='Requerido. Agregue el paciente en cuestion', widget=forms.NumberInput(attrs={'class': 'form-control',}))
+    tristeza = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=tristeza)
+    pesimismo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=pesimismo)
+    fracaso = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=fracaso)
+    placer = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=placer)
+    culpa = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=culpa)
+    castigo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=castigo)
+    disconformidad = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=disconformidad)
+    autocritica = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=autocritica)
+    llanto = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=llanto)
+    agitacion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=agitacion)
+    interes = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=interes)
+    indecision = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=indecision)
+    desvalorizacion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=desvalorizacion)
+    energia = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=energia)
+    sueño = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sueño)
+    irritabilidad = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=irritabilidad)
+    apetito = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=apetito)
+    concentracion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=concentracion)
+    fatiga = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=fatiga)
+    sexo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
     class Meta:
         model = Beck
-        fields = ("email","birth_date","sex","name","study","job","civil_state","religion","economical_situation")
-"""
+        fields = ("id_paciente","tristeza","pesimismo","fracaso","placer","culpa","castigo","llanto","agitacion","interes","indecision","desvalorizacion","energia","sueño","irritabilidad","apetito","concentracion","fatiga","sexo")

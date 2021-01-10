@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
+from doctores.models import Paciente
 from . import forms
 import numpy as np
 import pandas as pd
@@ -15,6 +16,9 @@ def docTest(request):
 	return render(request, "doctor/test.html")
 
 def docBeck(request):
+	form = forms.RegistrarTestBeckForm()
+	#Luego filtrar por el id doctor despues del login
+	pacientes = Paciente.objects.values('id','name')
 	if request.method == 'POST':
 		print('entro')
 		model = load_model('keras_models/suicide_ac100_loss2.h5')
@@ -91,15 +95,15 @@ def docBeck(request):
 		dato=pd.DataFrame(new[0]).T
 		ynew = np.round(model.predict(dato))
 		print(ynew)
-
-	return render(request, "doctor/beck.html")
+	context = {'form':form,'paciente':pacientes}
+	return render(request, "doctor/beck.html",context)
 
 def docRegPaciente(request):
 	form = forms.RegistrarPacienteForm()
 	if request.method == 'POST':
 		form = forms.RegistrarPacienteForm(request.POST)
 		if form.is_valid():
-			#form.save()
+			form.save()
 			return JsonResponse({'respuesta':True})
 		else:
 			return JsonResponse({'respuesta':False,'errores':dict(form.errors.items())})
