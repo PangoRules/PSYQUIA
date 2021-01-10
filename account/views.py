@@ -18,7 +18,8 @@ def registrarse(request):
     if request.method == 'POST':
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            print(form)
+            #form.save()
             return JsonResponse({'respuesta':True})
         #Esto sucedera cuando el formulario no sea validado de manera correcta. Falta el else y su respectivo bloque de codigo 
         else:
