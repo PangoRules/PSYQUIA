@@ -7,7 +7,7 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ('date_joined',)
     exclude = ('is_admin', 'is_staff', 'is_superuser',)
     search_fields = ('nombres', 'email')
-    list_per_page = 
+    list_per_page = 10
 
     def get_queryset(self, request):
         return Account.objects.filter(is_superuser=False)
