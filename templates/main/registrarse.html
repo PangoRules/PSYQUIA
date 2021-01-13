@@ -63,9 +63,6 @@
     </form>
 	<div class="text-center">Ya tienes una cuenta? <a href="{% url 'PaginaFormIniciarSesion' %}">Iniciar Sesión</a></div>
     <div class="text-center">Haz olvidado tu contraseña? <a href="{% url 'PaginaFormOlvideContra' %}">Recuperar Cuenta</a></div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExito">
-        Launch demo modal
-      </button>
 </div>
 {% include 'base/modals.html' %}
 {% endblock %}

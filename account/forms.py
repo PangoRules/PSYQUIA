@@ -14,11 +14,3 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = Account
         fields = ("email","nombres","apellidos","cedula","password1","password2")
-
-class LoginForm():
-    email = forms.EmailField(max_length=60, required=True,help_text='Requerido. Agregue una dirección de correo valida', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'Correo Electronico'}))
-    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':'Contraseña'}))
-
-    class Meta:
-        model = User
-        fields = ("email","password")

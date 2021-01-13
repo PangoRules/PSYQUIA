@@ -6,15 +6,22 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from keras.models import load_model
+from account.decorators import not_authenticated
 
 # Create your views here.
 
+@not_authenticated
 def docDashboard(request):
-	return render(request, "doctor/dashboard.html")
+	#Cambiar para que filtre por idDoctor
+	pacientes = Paciente.objects.all()
+	cabeceras = ['Nombre', 'Edad', 'Último Grado de Estudios', 'Ocupación', 'Nivel Económico', 'Correo Electrónico']
+	context={'cabeceras':cabeceras,'pacientes':pacientes}
+	return render(request, "doctor/dashboard.html",context)
 
 def docTest(request):
 	return render(request, "doctor/test.html")
 
+@not_authenticated
 def docBeck(request):
 	form = forms.RegistrarTestBeckForm()
 	#Luego filtrar por el id doctor despues del login
@@ -103,6 +110,7 @@ def docBeck(request):
 	context = {'form':form,'paciente':pacientes}
 	return render(request, "doctor/beck.html",context)
 
+@not_authenticated
 def docRegPaciente(request):
 	form = forms.RegistrarPacienteForm()
 	if request.method == 'POST':
@@ -115,8 +123,10 @@ def docRegPaciente(request):
 	context = {'form':form}
 	return render(request, "doctor/registrarpaciente.html",context)
 
+@not_authenticated
 def docCasoDistimico(request):
 	return render(request, "doctor/casodistimico.html")
 
+@not_authenticated
 def docCasoDepresivo(request):
 	return render(request, "doctor/casodepresivo.html")
