@@ -116,6 +116,8 @@ def docRegPaciente(request):
 	if request.method == 'POST':
 		form = forms.RegistrarPacienteForm(request.POST)
 		if form.is_valid():
+			nuevo_paciente = form.save(commit=False)
+			nuevo_paciente.doctor = request.user
 			form.save()
 			return JsonResponse({'respuesta':True})
 		else:

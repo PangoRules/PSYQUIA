@@ -19,7 +19,32 @@ $('#RegistroPacienteForm').submit(function(e){
         return response.json();
     })
     .then(data => {
-        console.log(data)
+        if(data.respuesta==true){
+            $('.alert-danger').remove();
+            $('#modalExitoPaciente').modal('toggle');
+            $('#RegistrRegistroPacienteFormoForm')[0].reset();
+        }else if(data.errores){
+            $('.alert-danger').remove();
+            for(var error in data.errores){
+                switch(error){
+                    case "email":
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_email').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
+                    break;
+                    case "birth_date":
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_birth_date').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
+                    break;
+                    case "name":
+                        for(var temp=0;temp<data.errores[error].length;temp++){
+                            $('#id_name').after('<div class="alert alert-danger mb-1 mt-3" role="alert"><small>'+data.errores[error][temp]+'</small></div>');
+                        }
+                    break;
+                }
+            }
+        }
     })
     .catch(err => {
         console.log("Error en el servidor: "+err)

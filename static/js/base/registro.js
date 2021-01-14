@@ -25,6 +25,7 @@ $('#RegistroForm').submit(function(e){
     })
     .then(data => {
         if(data.respuesta==true){
+            $('.alert-danger').remove();
             $('#modalExito').modal('toggle');
             $('#RegistroForm')[0].reset();
         }else if(data.errores){

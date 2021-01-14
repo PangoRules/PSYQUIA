@@ -1,4 +1,5 @@
 from django.db import models
+from account.models import Account
 
 #Opciones para los pacinetes
 sexo = (('1', 'Hombre'),('2', 'Mujer'))
@@ -10,6 +11,7 @@ situacion = (('0', 'Bajo'),('1', 'Medio-bajo'),('2', 'Mediano'),('3', 'Medio-alt
 
 # Create your models here.
 class Paciente(models.Model):
+    doctor = models.ForeignKey(Account,on_delete=models.CASCADE)
     email = models.EmailField(max_length=60, unique=True)
     birth_date = models.DateField(auto_now=False, auto_now_add=False,)
     sex = models.CharField(max_length=1,choices=sexo,default=1)
