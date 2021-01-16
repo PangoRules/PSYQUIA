@@ -39,14 +39,13 @@ def registrarse(request):
     if request.method == 'POST':
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data.get('email'))
             send_mail(
                 'Aviso de nuevo usuario',
                 'Favor de revisar el nuevo usuario y activar su cuenta', 
                 EMAIL_HOST_USER, 
                 ['animasdelmundo2@gmail.com'], 
                 fail_silently=False)
-            #form.save()
+            form.save()
             return JsonResponse({'respuesta':True})
         #Esto sucedera cuando el formulario no sea validado de manera correcta. Falta el else y su respectivo bloque de codigo 
         else:

@@ -8,13 +8,14 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ('date_joined',)
     exclude = ('is_admin', 'is_staff', 'is_superuser',)
     search_fields = ('nombres', 'email')
-    readonly_fields=('date_joined', 'last_login', 'password')
+    readonly_fields=('date_joined', 'last_login', )
     filter_horizontal=()
     fieldsets=()
     list_per_page = 10
+    pass
 
-    def get_queryset(self, request):
-        return Account.objects.filter(is_superuser=False)
+    #def get_queryset(self, request):
+    #    return Account.objects.filter(is_superuser=False)
     
 
 admin.site.register(Account,AccountAdmin)

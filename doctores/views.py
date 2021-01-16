@@ -103,6 +103,8 @@ def docBeck(request):
 		print(ynew)
 		form = forms.RegistrarTestBeckForm(request.POST)
 		if form.is_valid():
+			nuevo_test = form.save(commit=False)
+			print(nuevo_test.culpa)
 			form.save()
 			return JsonResponse({'respuesta':True})
 		else:
