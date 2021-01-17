@@ -22,14 +22,12 @@ $('#BeckForm').submit(function(e){
         if(data.respuesta==true){
             $('#modalExitoBeck').modal('toggle');
             $('.alert-danger').remove();
-            $('#BeckForm')[0].reset();
+           // $('#BeckForm')[0].reset();
             //window.location.href=""
         }else if(data.errores){
             topFunction();
             $('.alert-danger').remove();
-            console.log(data.errores);
             for(var error in data.errores){
-                console.log(data.errores[error]);
                 switch(error){
                     case "id_paciente":
                         for(var temp=0;temp<data.errores[error].length;temp++){
