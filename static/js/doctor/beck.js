@@ -22,7 +22,7 @@ $('#BeckForm').submit(function(e){
         if(data.respuesta==true){
             $('#modalExitoBeck').modal('toggle');
             $('.alert-danger').remove();
-            $('#BeckForm')[0].reset();
+           // $('#BeckForm')[0].reset();
             //window.location.href=""
         }else if(data.errores){
             topFunction();
