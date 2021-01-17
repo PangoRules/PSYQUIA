@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Pacientes Registrados: <span class="text-bold">40</span></div>
+                    <div class="card-body">Pacientes Registrados: <span class="text-bold">{{ pacientes|length }}</span></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="#dataTable">Ver más</a>
                         <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas fa-angle-right"></i> Font Awesome fontawesome.com --></div>
@@ -50,88 +50,6 @@
             </div>
             
         </div>
-        <div class="row mb-4">
-            <div id="perfildepresivo" class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Perfil Depresivo del Mes</h5>
-                        <div class="text-center mb-3">
-                            <img class="userimg" src="{% static 'img/doctor/userman.svg' %}" alt="Imagen usuario hombre">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <label for="nivel_economico">Nivel Económico</label>
-                                <input type="text" class="form-control" name="nivel_economico" value="Medio Bajo" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="profesion">Profesión</label>
-                                <input type="text" class="form-control" name="profesion" value="Cajero" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="escolaridad">Grado de estudios alcanzado</label>
-                                <input type="text" class="form-control" name="escolaridad" value="Secundaria" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="edo_civil">Estado Civil</label>
-                                <input type="text" class="form-control" name="edo_civil" value="Soltero" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="sexo">Sexo</label>
-                                <input type="text" class="form-control" name="sexo" value="Masculino" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="edad">Edad</label>
-                                <input type="text" class="form-control" name="edad" value="23 años" disabled>
-                            </div>
-                            <div class="col-md-12 col-lg-12">
-                                <label for="religion">Religión</label>
-                                <input type="text" class="form-control" name="religion" value="Ateo" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="perfildistimico" class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Perfil Distimico del Mes</h5>
-                        <div class="text-center mb-3">
-                            <img class="userimg" src="{% static 'img/doctor/userwoman.svg' %}" alt="Imagen usuario hombre">
-                        </div>
-                         <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <label for="nivel_economico">Nivel Económico</label>
-                                <input type="text" class="form-control" name="nivel_economico" value="Medio" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="profesion">Profesión</label>
-                                <input type="text" class="form-control" name="profesion" value="Maestra de Secundaria" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="escolaridad">Grado de estudios alcanzado</label>
-                                <input type="text" class="form-control" name="escolaridad" value="Preparatoria" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="edo_civil">Estado Civil</label>
-                                <input type="text" class="form-control" name="edo_civil" value="Casado" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="sexo">Sexo</label>
-                                <input type="text" class="form-control" name="sexo" value="Femenino" disabled>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-                                <label for="edad">Edad</label>
-                                <input type="text" class="form-control" name="edad" value="25 años" disabled>
-                            </div>
-                            <div class="col-md-12 col-lg-12">
-                                <label for="religion">Religión</label>
-                                <input type="text" class="form-control" name="religion" value="Catolica" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="tableDiv" class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
@@ -142,12 +60,9 @@
                     <table class="display responsive nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Grado Academico Alcanzado</th>
-                                <th>Municipio de Residencia</th>
-                                <th>Edad</th>
-                                <th>Primer Diágnostico Realizado</th>
-                                <th>Último Diágnostico Realizado</th>
+                                {% for cabecera in cabeceras %}
+                                    <th>{{cabecera}}</th>
+                                {% endfor %}
                             </tr>
                         </thead>
                         <tfoot>
@@ -161,86 +76,16 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009/01/12</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>2012/03/29</td>
-                                <td>$433,060</td>
-                            </tr>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>33</td>
-                                <td>2008/11/28</td>
-                                <td>$162,700</td>
-                            </tr>
-                            <tr>
-                                <td>Brielle Williamson</td>
-                                <td>Integration Specialist</td>
-                                <td>New York</td>
-                                <td>61</td>
-                                <td>2012/12/02</td>
-                                <td>$372,000</td>
-                            </tr>
-                            <tr>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td>59</td>
-                                <td>2012/08/06</td>
-                                <td>$137,500</td>
-                            </tr>
-                            <tr>
-                                <td>Rhona Davidson</td>
-                                <td>Integration Specialist</td>
-                                <td>Tokyo</td>
-                                <td>55</td>
-                                <td>2010/10/14</td>
-                                <td>$327,900</td>
-                            </tr>
-                            <tr>
-                                <td>Colleen Hurst</td>
-                                <td>Javascript Developer</td>
-                                <td>San Francisco</td>
-                                <td>39</td>
-                                <td>2009/09/15</td>
-                                <td>$205,500</td>
-                            </tr>
-                            <tr>
-                                <td>Sonya Frost</td>
-                                <td>Software Engineer</td>
-                                <td>Edinburgh</td>
-                                <td>23</td>
-                                <td>2008/12/13</td>
-                                <td>$103,600</td>
-                            </tr>
+                            {% for paciente in pacientes %}
+                                <tr>
+                                    <td>{{paciente.name}}</td>
+                                    <td>{{paciente.birth_date}}</td>
+                                    <td>{{paciente.get_study_display}}</td>
+                                    <td>{{paciente.get_job_display}}</td>
+                                    <td>{{paciente.get_economical_situation_display}}</td>
+                                    <td>{{paciente.email}}</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
