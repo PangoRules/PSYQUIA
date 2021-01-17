@@ -9,17 +9,21 @@ from .decorators import not_authenticated, authenticated_user
 
 @authenticated_user
 def iniciar_sesion(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        usuario = authenticate(request, email=email, password=password)
-        if usuario is not None:
-            login(request,usuario)
-            return redirect('DocDashboard')
-        else:
-            messages.error(request, 'Su correo o contraseña no coinciden')
-    context = {}
-    return render(request, "main/iniciar_sesion.html",context)
+	if request.method == 'POST':
+		email = request.POST.get('email')
+		password = request.POST.get('password')
+		usuario = authenticate(request, email=email, password=password)
+		if usuario is not None:
+			login(request,usuario)
+			print(usuario.is_superuser)
+			if usuario.is_superuser:
+				return redirect('/admin/')
+			else:
+				return redirect('DocDashboard')
+		else:
+			messages.error(request, 'Su correo o contraseña no coinciden')
+	context = {}
+	return render(request, "main/iniciar_sesion.html",context)
 
 @not_authenticated
 def cerrar_sesion(request):

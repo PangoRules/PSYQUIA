@@ -15,17 +15,15 @@
                 <h2>Paciente a Diagnosticar</h1>
                 <div class="form-row justify-content-center">
                     <div class="form-group col-md-12 col-lg-6">
-                        {{form.paciente}}
-                        <!--<select id="id_paciente" name="paciente_id" class="form-control">
-                            <option value="">Escoja su paciente</option>
-                            
+                        <select name="paciente_id" class="form-control" required="" id="id_paciente">
+                            <option value="" selected="">---------</option>
                             {% for pacientes in paciente %}
                                 <option value="{{pacientes.id}}">{{pacientes.name}}</option>
                             {% endfor %}
-                        </select>-->
+                        </select>
                     </div>
                 </div>
-                <h2>Datos Especificos</h2>
+                <h4>Datos Especificos</h4>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="tristeza">Tristeza</label>
@@ -126,6 +124,57 @@
                         <div class="form-group col-md-6">
                             <label for="perdida_interes_sexo">Pérdida de Interés en el Sexo</label>
                             {{form.sexo}}
+                        </div>
+                    </div>
+                    <h4>Datos Adicionales Recientes en la Vida del Paciente</h4>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="form-check">
+                                {{form.vivir_solo}}
+                                <label class="form-check-label" for="id_vivir_solo">Vivo Solo</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.conflicto_familiar}}
+                                <label class="form-check-label" for="id_conflicto_familiar">Conflicto Familiar Severo</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.muerte_ser_querido}}
+                                <label class="form-check-label" for="id_muerte_ser_querido">Muerte de un Ser Querido</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.presion_redes_sociales}}
+                                <label class="form-check-label" for="id_conflicto_familiar">Presion en Redes Sociales</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.dias_festivos}}
+                                <label class="form-check-label" for="id_dias_festivos">Días Festivos Recientes</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.divorcio_padres}}
+                                <label class="form-check-label" for="id_divorcio_padres">Divorcios de los Padres</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-check">
+                                {{form.perdida_trabajo}}
+                                <label class="form-check-label" for="id_perdida_trabajo">Perdida de Trabajo</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.conflicto_laboral}}
+                                <label class="form-check-label" for="id_conflicto_laboral">Conflicto Laboral Severo</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.separacion_conyugal}}
+                                <label class="form-check-label" for="id_separacion_conyugal">Separacion Conyugal</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.abuso_sexual}}
+                                <label class="form-check-label" for="id_conflicto_familiar">Abuso Sexual</label>
+                            </div>
+                            <div class="form-check">
+                                {{form.conflicto_amoroso}}
+                                <label class="form-check-label" for="id_conflicto_familiar">Conflicto Amoroso</label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row justify-content-center">

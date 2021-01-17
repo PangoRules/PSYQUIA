@@ -47,7 +47,6 @@ sexo = (('0', 'No he notado ningún cambio reciente en mi interés por el sexo.'
 
 
 class RegistrarTestBeckForm(forms.ModelForm):
-    paciente = forms.ModelChoiceField(queryset=Paciente.objects.all(),widget=forms.Select(attrs={'class': 'form-control',}))
     tristeza = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=tristeza)
     pesimismo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=pesimismo)
     fracaso = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=fracaso)
@@ -68,6 +67,18 @@ class RegistrarTestBeckForm(forms.ModelForm):
     concentracion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=concentracion)
     fatiga = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=fatiga)
     sexo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
+    
+    vivir_solo = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    conflicto_familiar = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    muerte_ser_querido = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    presion_redes_sociales = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    dias_festivos = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    divorcio_padres = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    perdida_trabajo = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    conflicto_laboral = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    separacion_conyugal = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    abuso_sexual = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    conflicto_amoroso = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
     class Meta:
         model = Beck
-        fields = ("paciente","tristeza","pesimismo","fracaso","disconformidad","autocritica","placer","culpa","castigo","llanto","agitacion","interes","indecision","desvalorizacion","energia","sueño","irritabilidad","apetito","concentracion","fatiga","sexo")
+        fields = ("conflicto_laboral","separacion_conyugal","abuso_sexual","conflicto_amoroso","vivir_solo","conflicto_familiar","muerte_ser_querido","presion_redes_sociales","dias_festivos","divorcio_padres","perdida_trabajo","tristeza","pesimismo","fracaso","disconformidad","autocritica","placer","culpa","castigo","llanto","agitacion","interes","indecision","desvalorizacion","energia","sueño","irritabilidad","apetito","concentracion","fatiga","sexo")
