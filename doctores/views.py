@@ -56,13 +56,20 @@ def docBeck(request):
 			trabajo[paciente.job]=1
 			civil=[0,0,0,0,0,0]
 			civil[paciente.civil_state]=1
-			religion=[0,0,0,0,0,0,0]
+			religion=[0,0,0,0,0,0]
 			religion[paciente.religion]=1
 			socieconomico=[0]
 			socieconomico[0]=paciente.economical_situation
-
 			sociodemograficos= edad+sexo+estudios+trabajo+civil+religion+socieconomico
+			
+
+
+			
 			print(sociodemograficos)
+			
+
+
+
 
 			#inputs =  pd.DataFrame(prueba)
 			#a= np.array(inputs.replace(np.nan, 0).T)

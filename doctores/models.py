@@ -4,7 +4,7 @@ from account.models import Account
 #Opciones para los pacinetes
 sexo = ((0, 'Hombre'),(1, 'Mujer'))
 estudio = ((0, 'Sin estudios'),(1, 'Secundaria o menor'),(2, 'Media Superior'),(3, 'Superior'),(4, 'Posgrado'))
-ocupacion = ((0, 'Sin ocupación'),(1, 'Estudios'),(2, 'Amo(a) de casa'),(3, 'Empleado(a) de empresa'),(4, 'Oficio o técnico'),(5, 'Emprendedor(a)'),(6, 'Profesionista'))
+ocupacion = ((0, 'Estudios'),(1, 'Amo(a) de casa'),(2, 'Empleado(a) de empresa'),(3, 'Sin ocupación'),(4, 'Oficio o técnico'),(5, 'Emprendedor(a)'),(6, 'Profesionista'))
 civil = ((0, 'Soltero'),(1, 'Casado'),(2, 'Viudo'),(3, 'Divorciado'),(4, 'Unión libre'),(5, 'Separado'))
 religionChoices = ((0, 'Católica'),(1, 'Cristiano'),(2, 'Ateo/Agnóstico'),(3, 'Adventista'),(4, 'Otro'),(5, 'Ninguna'))
 situacion = ((0, 'Bajo'),(1, 'Medio-bajo'),(2, 'Mediano'),(3, 'Medio-alto'),(4, 'Alto'))
