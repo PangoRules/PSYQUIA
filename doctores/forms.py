@@ -1,5 +1,6 @@
 from django import forms
 from doctores.models import Beck, Paciente
+from account.models import Account
 
 sexo = (('1', 'Hombre'),('2', 'Mujer'))
 estudio = (('1', 'Sin estudios'),('2', 'Secundaria o menor'),('3', 'Media Superior'),('4', 'Superior'),('5', 'Posgrado'))
@@ -9,18 +10,19 @@ religionChoices = (('1', 'Ninguna'),('2', 'Católica'),('3', 'Cristiano'),('4', 
 situacion = (('0', 'Bajo'),('1', 'Medio-bajo'),('2', 'Mediano'),('3', 'Medio-alto'),('4', 'Alto'))
 
 class RegistrarPacienteForm(forms.ModelForm):
-    email = forms.EmailField(max_length=60, required=True,help_text='Requerido. Agregue una dirección de correo válida', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'Correo Electronico'}))
-    birth_date = forms.CharField(required=True,help_text='Requerido. Agregue una fecha válida', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Fecha de nacimiento'}))
-    sex = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
-    name = forms.CharField(max_length=60, required=True, help_text='Seleccione una opción por favor',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Nombre del paciente'}))
-    study = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=estudio)
-    job = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=ocupacion)
-    civil_state = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=civil)
-    religion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=religionChoices)
-    economical_situation = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=situacion)
-    class Meta:
-        model = Paciente
-        fields = ("email","birth_date","sex","name","study","job","civil_state","religion","economical_situation")
+	email = forms.EmailField(max_length=60, required=True,help_text='Requerido. Agregue una dirección de correo válida', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'Correo Electronico'}))
+	birth_date = forms.CharField(required=True,help_text='Requerido. Agregue una fecha válida', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Fecha de nacimiento'}))
+	sex = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
+	name = forms.CharField(max_length=60, required=True, help_text='Seleccione una opción por favor',widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Nombre del paciente'}))
+	study = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=estudio)
+	job = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=ocupacion)
+	civil_state = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=civil)
+	religion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=religionChoices)
+	economical_situation = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=situacion)
+	class Meta:
+		model = Paciente
+		fields = ("email","birth_date","sex","name","study","job","civil_state","religion","economical_situation")
+		#exclude = ["doctor"]#fields = ("email","birth_date","sex","name","study","job","civil_state","religion","economical_situation")
 
 tristeza = (('0', 'No me siento triste.'),('1', 'Me siento triste gran parte del tiempo.'),('2', 'Me siento triste todo el tiempo.'),('3', 'Me siento tan triste o soy tan infeliz que no puedo soportarlo.'),)
 pesimismo = (('0', 'No estoy desalentado respecto del mi futuro.'),('1', 'Me siento más desalentado respecto de mi futuro que lo que solía estarlo.'),('2', 'No espero que las cosas funcionen para mi.'),('3', 'Siento que no hay esperanza para mi futuro y que sólo puede empeora.'),)

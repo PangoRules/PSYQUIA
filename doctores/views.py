@@ -4,38 +4,59 @@ from doctores.models import Paciente, Beck
 from . import forms
 import numpy as np
 import pandas as pd
+import datetime
 from scipy import stats
 from keras.models import load_model
-from datetime import datetime
+from account.decorators import not_authenticated
 
 # Create your views here.
 
+@not_authenticated
 def docDashboard(request):
-	return render(request, "doctor/dashboard.html")
+	#Cambiar para que filtre por idDoctor
+	pacientes = Paciente.objects.all()
+	cabeceras = ['Nombre', 'Edad', 'Último Grado de Estudios', 'Ocupación', 'Nivel Económico', 'Correo Electrónico']
+	context={'cabeceras':cabeceras,'pacientes':pacientes}
+	return render(request, "doctor/dashboard.html",context)
 
 def docTest(request):
 	return render(request, "doctor/test.html")
 
+@not_authenticated
 def docBeck(request):
-	paciente= Paciente.objects.values().filter(id=2)
+	#paciente= Paciente.objects.values().filter(id=2)
 	beck= Beck.objects.values().filter(paciente_id=2)
 
 	testbeck = Beck.objects.filter()
 	form = forms.RegistrarTestBeckForm()
 	#Luego filtrar por el id doctor despues del login
-	pacientes = Paciente.objects.values('id','name')
+	paciente = Paciente.objects.values('id','name')
+	print(paciente.values())
 	if request.method == 'POST':
-		model = load_model('keras_models/suicide_ac100_loss2.h5')
+		#model1 = load_model('keras_models/suicide_ac100_loss2.h5')
+		#model2 = load_model('keras_models/suicide_ac100_loss2.h5')
+		#model3 = load_model('keras_models/suicide_ac100_loss2.h5')
+
 		dataset = pd.read_csv('keras_models/DATASET_SUICIDIO.csv')
 		dataset = dataset.drop(['TESTIGO'],axis=1)
 		x = dataset.iloc[:,0:61].values
-		edad= [datetime.now().year-paciente[0]['birth_date'].year]
-		if paciente[0]['sex']=='1':
-			sexo=[1,0]
-		else:
-			sexo=[0,1]
-		print(sexo)
 
+		edad= [datetime.datetime.now().year-paciente[0]['birth_date'].year]
+		sexo=[0,0]
+		sexo[paciente[0]['sex']]=1
+		estudios=[0,0,0,0,0]
+		estudios[paciente[0]['study']]=1
+		trabajo=[0,0,0,0,0,0,0]
+		trabajo[paciente[0]['job']]=1
+		civil=[0,0,0,0,0,0]
+		civil[paciente[0]['civil_state']]=1
+		religion=[0,0,0,0,0,0,0]
+		religion[paciente[0]['religion']]=1
+		socieconomico=[0]
+		socieconomico[0]=paciente[0]['economical_situation']
+
+		sociodemograficos= edad+sexo+estudios+trabajo+civil+religion+socieconomico
+		print(sociodemograficos)
 		#inputs =  pd.DataFrame(prueba)
 		#a= np.array(inputs.replace(np.nan, 0).T)
 		#print(a)
@@ -43,28 +64,25 @@ def docBeck(request):
 		#dato=pd.DataFrame(new[0]).T
 		#ynew = np.round(model.predict(dato))
 		#print(ynew)
-
-		inputs =  pd.DataFrame(prueba)
-		a= np.array(inputs.replace(np.nan, 0).T)
-		print(a)
-		new = stats.zscore(np.append(a,x,axis=0),axis=0)
-		dato=pd.DataFrame(new[0]).T
-		ynew = np.round(model.predict(dato))
-		print(ynew)
 		form = forms.RegistrarTestBeckForm(request.POST)
 		if form.is_valid():
+			nuevo_test = form.save(commit=False)
+			print(nuevo_test.culpa)
 			form.save()
 			return JsonResponse({'respuesta':True})
 		else:
 			return JsonResponse({'respuesta':False,'errores':dict(form.errors.items())})
-	context = {'form':form,'paciente':pacientes}
+	context = {'form':form,'paciente':paciente}
 	return render(request, "doctor/beck.html",context)
 
+@not_authenticated
 def docRegPaciente(request):
 	form = forms.RegistrarPacienteForm()
 	if request.method == 'POST':
 		form = forms.RegistrarPacienteForm(request.POST)
 		if form.is_valid():
+			nuevo_paciente = form.save(commit=False)
+			nuevo_paciente.doctor = request.user
 			form.save()
 			return JsonResponse({'respuesta':True})
 		else:
@@ -72,8 +90,10 @@ def docRegPaciente(request):
 	context = {'form':form}
 	return render(request, "doctor/registrarpaciente.html",context)
 
+@not_authenticated
 def docCasoDistimico(request):
 	return render(request, "doctor/casodistimico.html")
 
+@not_authenticated
 def docCasoDepresivo(request):
 	return render(request, "doctor/casodepresivo.html")
