@@ -45,6 +45,7 @@ fatiga = (('0', 'No estoy más cansado o fatigado que lo habitual.'),('1', 'Me f
 sexo = (('0', 'No he notado ningún cambio reciente en mi interés por el sexo.'),('1', 'Estoy menos interesado en el sexo de lo que solía estarlo.'),('2', 'Estoy mucho menos interesado en el sexo.'),('3', 'He perdido completamente el interés en el sexo.'),)
 
 class Beck(models.Model):
+    paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
     tristeza = models.CharField(max_length=1,choices=tristeza,default=1)
     pesimismo = models.CharField(max_length=1,choices=pesimismo,default=1)
     fracaso = models.CharField(max_length=1,choices=fracaso,default=1)
@@ -65,7 +66,6 @@ class Beck(models.Model):
     concentracion = models.CharField(max_length=1,choices=concentracion,default=1)
     fatiga = models.CharField(max_length=1,choices=fatiga,default=1)
     sexo = models.CharField(max_length=1,choices=sexo,default=1)
-    paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.paciente.name

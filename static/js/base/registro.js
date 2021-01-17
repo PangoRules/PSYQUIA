@@ -25,13 +25,10 @@ $('#RegistroForm').submit(function(e){
     })
     .then(data => {
         if(data.respuesta==true){
-            //console.log("Exito: "+data.respuesta);
             $('#modalExito').modal('toggle');
             $('#RegistroForm')[0].reset();
-        }else{
-            $('#modalError').modal('toggle');
+        }else if(data.errores){
             $('.alert-danger').remove();
-            //console.log("Fracaso: "+data.respuesta);
             for(var error in data.errores){
                 switch(error){
                     case "email":
@@ -66,9 +63,11 @@ $('#RegistroForm').submit(function(e){
                     break;
                 }
             }
+        }else{
+            $('#modalError').modal('toggle');
         }
     })
     .catch(err => {
-        console.log("Error en el servidor: "+err);
+        $('#modalError').modal('toggle');
     });
 });

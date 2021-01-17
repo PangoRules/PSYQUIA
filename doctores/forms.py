@@ -45,7 +45,7 @@ sexo = (('0', 'No he notado ningún cambio reciente en mi interés por el sexo.'
 
 
 class RegistrarTestBeckForm(forms.ModelForm):
-    id_paciente = forms.IntegerField(required=True,help_text='Requerido. Agregue el paciente en cuestion', widget=forms.NumberInput(attrs={'class': 'form-control',}))
+    paciente = forms.ModelChoiceField(queryset=Paciente.objects.all(),widget=forms.Select(attrs={'class': 'form-control',}))
     tristeza = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=tristeza)
     pesimismo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=pesimismo)
     fracaso = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=fracaso)
@@ -68,4 +68,4 @@ class RegistrarTestBeckForm(forms.ModelForm):
     sexo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
     class Meta:
         model = Beck
-        fields = ("id_paciente","tristeza","pesimismo","fracaso","placer","culpa","castigo","llanto","agitacion","interes","indecision","desvalorizacion","energia","sueño","irritabilidad","apetito","concentracion","fatiga","sexo")
+        fields = ("paciente","tristeza","pesimismo","fracaso","disconformidad","autocritica","placer","culpa","castigo","llanto","agitacion","interes","indecision","desvalorizacion","energia","sueño","irritabilidad","apetito","concentracion","fatiga","sexo")

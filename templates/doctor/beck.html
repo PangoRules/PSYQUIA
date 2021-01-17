@@ -15,12 +15,14 @@
                 <h2>Paciente a Diagnosticar</h1>
                 <div class="form-row justify-content-center">
                     <div class="form-group col-md-12 col-lg-6">
-                        <select id="paciente" name="paciente" class="form-control">
-                            <option value="" selected>Escoja su paciente</option>
+                        {{form.paciente}}
+                        <!--<select id="id_paciente" name="paciente_id" class="form-control">
+                            <option value="">Escoja su paciente</option>
+                            
                             {% for pacientes in paciente %}
                                 <option value="{{pacientes.id}}">{{pacientes.name}}</option>
                             {% endfor %}
-                        </select>
+                        </select>-->
                     </div>
                 </div>
                 <h2>Datos Especificos</h2>
@@ -135,6 +137,7 @@
             </div>
         </div>
     </div>
+    {% include 'base/modals.html' %}
 {% endblock %}
 {% block contenido_scripts %}
 <script type="module" src="{% static 'js/doctor/beck.js' %}"></script>
