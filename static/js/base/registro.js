@@ -1,43 +1,23 @@
 import * as constants from './constants.js';
+import * as csrf from './crfstoken.js';
 
 $(function(){
 
 });
 
 /**
- * Funcion para obtener el token CSRF con javascript
- * @param {string} name - Parametro donde se le coloca el tipo de valor que se desea obtener, en este caso el token CSRF 
- * @returns {string} Token CSRF a insertar al metodo fetch
- */
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-/**
  * Funcion encargada de prevenir que el formulario sea submitido
  * para poder crear un objeto con los datos de este y luego mandarlo
  * por post con fetch
  */
-$('#RegistroForm').on('submit', function(e){
+$('#RegistroForm').submit(function(e){
     e.preventDefault();
     var form = new FormData(document.getElementById('RegistroForm'));
     fetch(constants.REGISTRO_URL,{
         method: "POST",
         body: form,
         headers: {
-            "X-CSRFToken": getCookie('csrftoken'),
+            "X-CSRFToken": csrf.getCookie('csrftoken'),
         }
     })
     .then(response => {
@@ -45,12 +25,11 @@ $('#RegistroForm').on('submit', function(e){
     })
     .then(data => {
         if(data.respuesta==true){
-            //console.log("Exito: "+data.respuesta);
+            $('.alert-danger').remove();
             $('#modalExito').modal('toggle');
             $('#RegistroForm')[0].reset();
-        }else{
+        }else if(data.errores){
             $('.alert-danger').remove();
-            //console.log("Fracaso: "+data.respuesta);
             for(var error in data.errores){
                 switch(error){
                     case "email":
@@ -85,9 +64,11 @@ $('#RegistroForm').on('submit', function(e){
                     break;
                 }
             }
+        }else{
+            $('#modalError').modal('toggle');
         }
     })
     .catch(err => {
-        console.log("Error en el servidor: "+err);
+        $('#modalError').modal('toggle');
     });
 });

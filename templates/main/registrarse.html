@@ -63,27 +63,8 @@
     </form>
 	<div class="text-center">Ya tienes una cuenta? <a href="{% url 'PaginaFormIniciarSesion' %}">Iniciar Sesión</a></div>
     <div class="text-center">Haz olvidado tu contraseña? <a href="{% url 'PaginaFormOlvideContra' %}">Recuperar Cuenta</a></div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExito">
-        Launch demo modal
-      </button>
 </div>
-<!-- Modal Éxito Crear Cuenta-->
-<div class="modal fade" id="modalExito" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal de éxito" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-success d-block text-center">
-                <h5 class="modal-title text-white" id="exampleModalLabel">CREACIÓN ÉXITOSA</h5>
-            </div>
-            <div class="modal-body bg-light">
-                <p class="text-dark text-justify">Se ha creado tu cuenta con éxito. Favor de esperar a que el administrador verifique y te de acceso.</p>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% include 'base/modals.html' %}
 {% endblock %}
 
 {% block contenido_scripts %}
