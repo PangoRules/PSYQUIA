@@ -27,9 +27,7 @@ $('#BeckForm').submit(function(e){
         }else if(data.errores){
             topFunction();
             $('.alert-danger').remove();
-            console.log(data.errores);
             for(var error in data.errores){
-                console.log(data.errores[error]);
                 switch(error){
                     case "id_paciente":
                         for(var temp=0;temp<data.errores[error].length;temp++){
