@@ -8,7 +8,7 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ('date_joined',)
     exclude = ('is_admin', 'is_staff', 'is_superuser',)
     search_fields = ('nombres', 'email')
-    readonly_fields=('date_joined', 'last_login', )
+    readonly_fields=('date_joined', 'last_login', 'password')
     filter_horizontal=()
     fieldsets=()
     list_per_page = 10

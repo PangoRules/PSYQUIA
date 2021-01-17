@@ -22,7 +22,7 @@ $('#RegistroPacienteForm').submit(function(e){
         if(data.respuesta==true){
             $('.alert-danger').remove();
             $('#modalExitoPaciente').modal('toggle');
-            $('#RegistrRegistroPacienteFormoForm')[0].reset();
+            $('#RegistroPacienteForm')[0].reset();
         }else if(data.errores){
             $('.alert-danger').remove();
             for(var error in data.errores){

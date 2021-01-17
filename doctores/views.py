@@ -34,23 +34,19 @@ def docBeck(request):
 	current_user = request.user
 	pacientes = Paciente.objects.values('id','name').filter(doctor_id=current_user.id)
 	if request.method == 'POST':
-		print('entro post')
 		form = forms.RegistrarTestBeckForm(request.POST)
-		print(form.is_valid())
 		if form.is_valid():
 			nuevo_test = form.save(commit=False)
 			paciente = Paciente.objects.get(id=request.POST['paciente_id'])
 			nuevo_test.paciente = paciente
-			print(paciente)
 			form.save()
 			#model1 = load_model('keras_models/suicide_ac100_loss2.h5')
 			#model2 = load_model('keras_models/suicide_ac100_loss2.h5')
 			#model3 = load_model('keras_models/suicide_ac100_loss2.h5')
-
+			print(paciente.job)
 			dataset = pd.read_csv('keras_models/DATASET_SUICIDIO.csv')
 			dataset = dataset.drop(['TESTIGO'],axis=1)
 			x = dataset.iloc[:,0:61].values
-
 			edad= [datetime.datetime.now().year-paciente.birth_date.year]
 			sexo=[0,0]
 			sexo[paciente.sex]=1
