@@ -48,6 +48,7 @@ sexo = ((0, 'No he notado ningún cambio reciente en mi interés por el sexo.'),
 
 class Beck(models.Model):
     paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
     tristeza = models.IntegerField(choices=tristeza,default=1)
     pesimismo = models.IntegerField(choices=pesimismo,default=1)
     fracaso = models.IntegerField(choices=fracaso,default=1)

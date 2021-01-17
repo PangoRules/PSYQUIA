@@ -111,9 +111,11 @@ def docBeck(request):
 			dato=pd.DataFrame(new[0]).T
 			suicidio_diagnostico = np.round(model1.predict(dato))
 			trastorno = np.round(model2.predict(dato))
-			print(dato)
-			print(dato.iloc[:,28:50].values)
-			tipo_trastorno=np.round(model3.predict(dato.iloc[:,28:50].values))
+			tipo_trastorno=[[0,0,0]]
+			if trastorno[0][0]==1:
+				tipo_trastorno=np.round(model3.predict(dato.iloc[:,28:50].values))
+				print('Entro a tipos de depresion')
+			
 			print("El paciente se va a suicidar?: -","nel" if(suicidio_diagnostico==0) else "si")
 			print(trastorno[0][0])
 			print(tipo_trastorno)
@@ -123,9 +125,18 @@ def docBeck(request):
 			print("El paciente tiene melancolico?: -","nel" if(tipo_trastorno[0][0]==0) else "si")
 			print("El paciente tiene atipico?: -","nel" if(tipo_trastorno[0][1]==0) else "si")
 			print("El paciente tiene catatonico?: -","nel" if(tipo_trastorno[0][2]==0) else "si")
-			 
 
-			return JsonResponse({'respuesta':True})
+			
+			resultados = {
+				'Suicidio': False if suicidio_diagnostico==0 else True,
+				'Depresion': False if trastorno[0][0]==0 else True,
+				'Distimia': False if trastorno[0][1]==0 else True,
+				'Melancolico': False if tipo_trastorno[0][0]==0 else True,
+				'Atipico': False if tipo_trastorno[0][1]==0 else True,
+				'Catatonico': False if tipo_trastorno[0][2]==0 else True,
+			}
+
+			return JsonResponse({'respuesta':True,'resultados':resultados})
 		else:
 			return JsonResponse({'respuesta':False,'errores':dict(form.errors.items())})
 	context = {'form':form,'paciente':pacientes}
