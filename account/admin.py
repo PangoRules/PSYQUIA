@@ -14,8 +14,8 @@ class AccountAdmin(admin.ModelAdmin):
     list_per_page = 10
     pass
 
-    #def get_queryset(self, request):
-    #    return Account.objects.filter(is_superuser=False)
+    def get_queryset(self, request):
+        return Account.objects.filter(is_superuser=False)
     
 
 admin.site.register(Account,AccountAdmin)

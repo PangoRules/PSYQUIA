@@ -13,7 +13,8 @@ from account.decorators import not_authenticated
 @not_authenticated
 def docDashboard(request):
 	#Cambiar para que filtre por idDoctor
-	pacientes = Paciente.objects.all()
+	current_user = request.user
+	pacientes = Paciente.objects.all().filter(doctor_id=current_user.id)
 	cabeceras = ['Nombre', 'Edad', 'Último Grado de Estudios', 'Ocupación', 'Nivel Económico', 'Correo Electrónico']
 	context={'cabeceras':cabeceras,'pacientes':pacientes}
 	return render(request, "doctor/dashboard.html",context)
@@ -25,7 +26,8 @@ def docTest(request):
 def docBeck(request):
 	form = forms.RegistrarTestBeckForm()
 	#Luego filtrar por el id doctor despues del login
-	pacientes = Paciente.objects.values('id','name')
+	current_user = request.user
+	pacientes = Paciente.objects.values('id','name').filter(doctor_id=current_user.id)
 	if request.method == 'POST':
 		model = load_model('keras_models/suicide_ac100_loss2.h5')
 		dataset = pd.read_csv('keras_models/DATASET_SUICIDIO.csv')
@@ -104,7 +106,8 @@ def docBeck(request):
 		form = forms.RegistrarTestBeckForm(request.POST)
 		if form.is_valid():
 			nuevo_test = form.save(commit=False)
-			print(nuevo_test.culpa)
+			paciente = Paciente.objects.get(id=request.POST['paciente_id'])
+			nuevo_test.paciente = paciente
 			form.save()
 			return JsonResponse({'respuesta':True})
 		else:

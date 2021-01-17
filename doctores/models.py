@@ -68,6 +68,17 @@ class Beck(models.Model):
     concentracion = models.CharField(max_length=1,choices=concentracion,default=1)
     fatiga = models.CharField(max_length=1,choices=fatiga,default=1)
     sexo = models.CharField(max_length=1,choices=sexo,default=1)
+    vivir_solo = models.BooleanField(default=False)
+    conflicto_familiar = models.BooleanField(default=False)
+    muerte_ser_querido = models.BooleanField(default=False)
+    presion_redes_sociales = models.BooleanField(default=False)
+    dias_festivos = models.BooleanField(default=False)
+    divorcio_padres = models.BooleanField(default=False)
+    perdida_trabajo = models.BooleanField(default=False)
+    conflicto_laboral = models.BooleanField(default=False)
+    separacion_conyugal = models.BooleanField(default=False)
+    abuso_sexual = models.BooleanField(default=False)
+    conflicto_amoroso = models.BooleanField(default=False)
 
     def __str__(self):
         return self.paciente.name
