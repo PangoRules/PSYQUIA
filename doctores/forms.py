@@ -67,7 +67,6 @@ class RegistrarTestBeckForm(forms.ModelForm):
     concentracion = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=concentracion)
     fatiga = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=fatiga)
     sexo = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control',}), choices=sexo)
-    
     vivir_solo = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
     conflicto_familiar = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
     muerte_ser_querido = forms.BooleanField(initial=False, required=False, widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
