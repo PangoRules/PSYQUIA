@@ -8,6 +8,7 @@
 {% block contenido_body %}
 <div class="signup-form">
     <form action="" method="post">
+        {% csrf_token %}
 		<h2>
             <div class="row">
                 <div class="col-12">
@@ -22,6 +23,16 @@
         <div class="form-group">
         	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
         </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{message.tags}} mb-1 mt-3" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <small>{{message}}</small>
+                </div>
+            {% endfor %}
+        {% endif %}
 		<div class="form-group">
             <button type="submit" class="btn btn-success btn-lg btn-block">Recuperar Cuenta</button>
         </div>

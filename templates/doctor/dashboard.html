@@ -12,78 +12,161 @@
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
         <div class="row">
-            <div class="col-xl-3 col-md-6">
+            <div class="col-xl-4 col-md-6">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Pacientes Registrados: <span class="text-bold">{{ pacientes|length }}</span></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#dataTable">Ver más</a>
+                        <a class="small text-white stretched-link" href="#." onclick="pacientesRegistrados()">Ver más</a>
                         <div class="small text-white"><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas fa-angle-right"></i> Font Awesome fontawesome.com --></div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">Casos Detectados con Trastorno Depresivo: <span class="text-bold">35</span></div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{% url 'DocCasoDepresivo' %}">Ver más</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 hover-to-show-link">
+            <div class="col-xl-4 col-md-6 hover-to-show-link">
                 <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Diagnosticos Realizados: <span class="text-bold">40</span></div>
+                    <div class="card-body">Diagnosticos Realizados: <span class="text-bold">{{total_casos}}</span></div>
                     <div class="card-footer d-flex align-items-center justify-content-between hover-to-show">
-                        <a class="small text-white stretched-link" href="#">Ver más</a>
+                        <a class="small text-white stretched-link" href="#." onclick="diagnosticosRealizados()">Ver más</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Casos Detectados con Trastorno Distímico: <span class="text-bold">5</span></div>
+            <div class="col-xl-4 col-md-12">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Casos Detectados con Trastorno Depresivo o Distimico: <span class="text-bold">{{total_casos_depresion_distimia}}</span></div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{% url 'DocCasoDistimico' %}">Ver más</a>
+                        <a class="small text-white stretched-link" href="#." onclick="diagnosticosDepresivoDistimico()">Ver más</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div>
-            
+            </div>            
         </div>
-        <div id="tableDiv" class="card mb-4">
+        <div id="pacientesRegistrados" class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
                 Pacientes Diágnosticados
             </div>
             <div class="card-body">
                 <div class="container-fluid">
-                    <table class="display responsive nowrap" id="dataTable" width="100%" cellspacing="0">
+                    <table class="display responsive nowrap" id="pacientesDataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 {% for cabecera in cabeceras %}
+                                    <th>{{cabecera}}</th>
+                                {% endfor %}
+                                <th data-priority="1">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                {% for cabecera in cabeceras %}
+                                    <th>{{cabecera}}</th>
+                                {% endfor %}
+                                <th data-priority="1">Acciones</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for paciente in pacientes %}
+                                <tr>
+                                    <td id="{{paciente.id}}">{{paciente.name}}</td>
+                                    <td>{{paciente.birth_date}}</td>
+                                    <td>{{paciente.get_study_display}}</td>
+                                    <td>{{paciente.get_job_display}}</td>
+                                    <td>{{paciente.get_economical_situation_display}}</td>
+                                    <td>{{paciente.email}}</td>
+                                    <td><a href="#." onclick="ver_edit_paciente('{{paciente.id}}')"><i class="fa fa-id-card" data-toggle="tooltip" title="Editar/Ver Paciente" aria-hidden="true"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="diagnosticosRealizados" class="card mb-4" style="display: none;">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Diagnosticos Realizados
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <table class="display responsive nowrap" id="diagnosticosDataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                {% for cabecera in cabecerasDiagnosticos %}
                                     <th>{{cabecera}}</th>
                                 {% endfor %}
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Grado Academico Alcanzado</th>
-                                <th>Municipio de Residencia</th>
-                                <th>Edad</th>
-                                <th>Primer Diágnostico Realizado</th>
-                                <th>Último Diágnostico Realizado</th>
+                                {% for cabecera in cabecerasDiagnosticos %}
+                                    <th>{{cabecera}}</th>
+                                {% endfor %}
                             </tr>
                         </tfoot>
                         <tbody>
-                            {% for paciente in pacientes %}
+                            {% for resultado in resultadosDiagnosticoGeneral.all %}
                                 <tr>
-                                    <td>{{paciente.name}}</td>
-                                    <td>{{paciente.birth_date}}</td>
-                                    <td>{{paciente.get_study_display}}</td>
-                                    <td>{{paciente.get_job_display}}</td>
-                                    <td>{{paciente.get_economical_situation_display}}</td>
-                                    <td>{{paciente.email}}</td>
+                                    <td id="{{resultado.id}}">{{resultado.beck.paciente.name}}</td>
+                                    <td>{{resultado.created_at}}</td>
+                                    <td>{{resultado.Depresion}}</td>
+                                    <td>{{resultado.Distimia}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="diagnosticosDepresivoDistimico" class="card mb-4" style="display: none;">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Diagnosticos Diagnosticados con Depresion o Distimia
+            </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    <table class="display responsive nowrap" id="diagnosticosDepresivoDistimicoDataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                {% for cabecera in cabecerasDiagnosticosDepresivoDistimico %}
+                                    <th>{{cabecera}}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                {% for cabecera in cabecerasDiagnosticosDepresivoDistimico %}
+                                    <th>{{cabecera}}</th>
+                                {% endfor %}
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for resultado in resultadosDiagnosticoDepresivoDistimico.all %}
+                                <tr>
+                                    <td id="{{resultado.id}}">{{resultado.beck.paciente.name}}</td>
+                                    <td>{{resultado.created_at}}</td>
+                                    {% if resultado.Depresion %}
+                                    <td><strong><p class="fa fa-check"></p></strong></td>
+                                    {% else %}
+                                    <td><strong><p>---------</p></strong></td>
+                                    {% endif %}
+                                    {% if resultado.Distimia %}
+                                    <td><strong><p class="fa fa-check"></p></strong></td>
+                                    {% else %}
+                                    <td><strong><p>---------</p></strong></td>
+                                    {% endif %}
+                                    {% if resultado.Melancolico %}
+                                    <td>Melancolico</td>
+                                    {% else %}
+                                        {% if resultado.Atipico %}
+                                        <td>Atipico</td>
+                                        {% else %}
+                                            {% if resultado.Catatonico %}
+                                            <td>Catatonico</td>
+                                            {% else %}
+                                            <td><strong>-------</strong></td>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -92,8 +175,98 @@
             </div>
         </div>
     </div>
+    <!-- Modal Éxito Realizar Test de Beck-->
+    <div class="modal fade" id="modalEditarPaciente" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal Editar Paciente" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-block text-center">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Editar Paciente</h5>
+                </div>
+                <div class="modal-body bg-light">
+                    <form id="EditPacienteForm" action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="sexo">Sexo</label>
+                                    {{ formEditarPaciente.sex }}  
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="fechanac">Fecha de Nacimiento</label>
+                                    {{ formEditarPaciente.birth_date }}   
+                                </div>
+                            </div>
+                       </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="nombrecompleto">Nombre Completo</label>
+                                    {{ formEditarPaciente.name }}   
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="correo">Correo electrónico del paciente</label>
+                                    {{ formEditarPaciente.email }} 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="escolaridad">Ultimo grado de estudios</label>
+                                    {{ formEditarPaciente.study }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="profesion">Ocupación</label >
+                                    {{ formEditarPaciente.job }} 
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="estadocivil">Estado civil</label>
+                                    {{ formEditarPaciente.civil_state }} 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="religion">Religión</label >
+                                    {{ formEditarPaciente.religion }} 
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="small mb-1" for="economico">Nivel económico</label >
+                                        {{ formEditarPaciente.economical_situation }} 
+                                </div>
+                            </div>
+                       </div>
+                       <div class="form-group mt-4 mb-0 text-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'base/modals.html' %}
 {% endblock %}
 {% block contenido_scripts %}
-<script src="{% static 'js/loggedtemplate/datatables-demo.js' %}"></script>
+<script src="{% static 'js/doctor/datatables.js' %}"></script>
+<script src="{% static 'js/doctor/dashboard.js' %}"></script>
 {% endblock %}
 

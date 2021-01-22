@@ -1,6 +1,10 @@
 from django.db import models
 from account.models import Account
 
+
+
+
+
 #Opciones para los pacinetes
 sexo = ((0, 'Hombre'),(1, 'Mujer'))
 estudio = ((0, 'Sin estudios'),(1, 'Secundaria o menor'),(2, 'Media Superior'),(3, 'Superior'),(4, 'Posgrado'))
@@ -83,3 +87,16 @@ class Beck(models.Model):
 
     def __str__(self):
         return self.paciente.name
+
+class ResultadoDiagnostico(models.Model):
+    beck = models.ForeignKey(Beck,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    Suicidio = models.BooleanField(default=False)
+    Depresion = models.BooleanField(default=False)
+    Distimia = models.BooleanField(default=False)
+    Melancolico = models.BooleanField(default=False)
+    Atipico = models.BooleanField(default=False)
+    Catatonico = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.beck.paciente.name

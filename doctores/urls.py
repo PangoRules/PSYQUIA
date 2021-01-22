@@ -23,4 +23,7 @@ urlpatterns = [
     path('doc/registrarpaciente',views.docRegPaciente, name="DocRegPac"),
     path('doc/casos_distimicos', views.docCasoDistimico, name="DocCasoDistimico"),
     path('doc/casos_depresivos', views.docCasoDepresivo, name="DocCasoDepresivo"),
+
+    path('doc/get_datos_paciente',views.docGetDatosPaciente),
+    path('doc/editar_paciente',views.docEditarPaciente),
 ]

@@ -5,6 +5,7 @@
 export const REGISTRO_URL = "/registrarse/";
 export const REGISTRO_PACIENTE_URL = "/doc/registrarpaciente";
 export const REGISTRO_BECK = "/doc/becktest";
+export const GET_DATOS_PACIENTE = "/doc/get_datos_paciente";
 
 
 
@@ -21,5 +22,4 @@ export function convertFormDatatoJson(formdata){
     }else{
         return 'Formulario Vacio';
     }
-    
 }

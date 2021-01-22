@@ -36,7 +36,10 @@ SECRET_KEY = 'dzx%s=5-sog+kfr0#okic7u(slh+g)er35v%!^(=ma8=nm^p*f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'pangoruleshere.pythonanywhere.com',
+    '127.0.0.1'
+]
 
 
 # Application definition

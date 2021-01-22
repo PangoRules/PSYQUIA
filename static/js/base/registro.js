@@ -24,11 +24,14 @@ $('#RegistroForm').submit(function(e){
         return response.json();
     })
     .then(data => {
+        $('.loaderbackground').show();
         if(data.respuesta==true){
             $('.alert-danger').remove();
+            $('.loaderbackground').hide();
             $('#modalExito').modal('toggle');
             $('#RegistroForm')[0].reset();
         }else if(data.errores){
+            $('.loaderbackground').hide();
             $('.alert-danger').remove();
             for(var error in data.errores){
                 switch(error){

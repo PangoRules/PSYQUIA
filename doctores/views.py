@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
-from doctores.models import Paciente, Beck
+from doctores.models import Paciente, Beck, ResultadoDiagnostico
 from . import forms
 import numpy as np
 import pandas as pd
@@ -8,16 +8,57 @@ import datetime
 from scipy import stats
 from keras.models import load_model
 from account.decorators import not_authenticated
+from django.db.models import Q
+import json
 
 # Create your views here.
+
+@not_authenticated
+def docGetDatosPaciente(request):
+	id_paciente = json.loads(request.body)
+	paciente = Paciente.objects.filter(id=id_paciente).values()
+	return JsonResponse({'data':list(paciente)})
+
+#Faltan las validaciones
+@not_authenticated
+def docEditarPaciente(request):
+	form = forms.RegistrarPacienteForm(request.POST)
+	paciente = Paciente.objects.filter(email=form.data['email']).get()
+	paciente.email = form.data['email']
+	paciente.birth_date = form.data['birth_date']
+	paciente.sex = form.data['sex']
+	paciente.name = form.data['name']
+	paciente.study = form.data['study']
+	paciente.job = form.data['job']
+	paciente.civil_state = form.data['civil_state']
+	paciente.religion = form.data['religion']
+	paciente.economical_situation = form.data['economical_situation']
+	paciente.save()
+	#print(form.is_valid())
+	#if form.is_valid():
+	return JsonResponse({'data':True})
+	#else:
+	#	return JsonResponse({'errores':dict(form.errors.items())})
 
 @not_authenticated
 def docDashboard(request):
 	#Cambiar para que filtre por idDoctor
 	current_user = request.user
 	pacientes = Paciente.objects.all().filter(doctor_id=current_user.id)
+	resultadosDiagnosticoGeneral = ResultadoDiagnostico.objects.filter(beck__paciente__doctor__id=current_user.id)
+	resultadosDiagnosticoDepresivoDistimico = ResultadoDiagnostico.objects.filter(Q(Distimia=True)|Q(Depresion=True),beck__paciente__doctor__id=current_user.id)
+
+	total_casos_depresion_distimia = ResultadoDiagnostico.objects.filter(Q(Distimia=True)|Q(Depresion=True),beck__paciente__doctor__id=current_user.id).count()
+	total_casos = ResultadoDiagnostico.objects.filter(beck__paciente__doctor__id=current_user.id).count()
+	formEditarPaciente = forms.RegistrarPacienteForm()
+
 	cabeceras = ['Nombre', 'Edad', 'Último Grado de Estudios', 'Ocupación', 'Nivel Económico', 'Correo Electrónico']
-	context={'cabeceras':cabeceras,'pacientes':pacientes}
+	cabecerasDiagnosticos = ['Nombre', 'Fecha Diagnostico', 'Depresión', 'Distimia']
+	cabecerasDiagnosticosDepresivoDistimico = ['Nombre', 'Fecha Diagnostico', 'Depresión', 'Distimia','Tipo de Depresión']
+	context={'cabeceras':cabeceras,'pacientes':pacientes, 'total_casos_depresion_distimia':total_casos_depresion_distimia, 
+	'total_casos':total_casos, 'cabecerasDiagnosticos':cabecerasDiagnosticos,
+	'resultadosDiagnosticoGeneral':resultadosDiagnosticoGeneral,'resultadosDiagnosticoDepresivoDistimico':resultadosDiagnosticoDepresivoDistimico,
+	'cabecerasDiagnosticosDepresivoDistimico':cabecerasDiagnosticosDepresivoDistimico, 'formEditarPaciente':formEditarPaciente}
 	return render(request, "doctor/dashboard.html",context)
 
 def docTest(request):
@@ -112,10 +153,13 @@ def docBeck(request):
 			suicidio_diagnostico = np.round(model1.predict(dato))
 			trastorno = np.round(model2.predict(dato))
 			tipo_trastorno=[[0,0,0]]
+
 			if trastorno[0][0]==1:
 				tipo_trastorno=np.round(model3.predict(dato.iloc[:,28:50].values))
 				print('Entro a tipos de depresion')
 			
+
+
 			print("El paciente se va a suicidar?: -","nel" if(suicidio_diagnostico==0) else "si")
 			print(trastorno[0][0])
 			print(tipo_trastorno)
@@ -126,7 +170,16 @@ def docBeck(request):
 			print("El paciente tiene atipico?: -","nel" if(tipo_trastorno[0][1]==0) else "si")
 			print("El paciente tiene catatonico?: -","nel" if(tipo_trastorno[0][2]==0) else "si")
 
-			
+			resultado_diagnostico = ResultadoDiagnostico()
+			resultado_diagnostico.beck=nuevo_test
+			resultado_diagnostico.Suicidio = False if suicidio_diagnostico==0 else True
+			resultado_diagnostico.Depresion = False if trastorno[0][0]==0 else True
+			resultado_diagnostico.Distimia = False if trastorno[0][1]==0 else True
+			resultado_diagnostico.Melancolico = False if tipo_trastorno[0][0]==0 else True
+			resultado_diagnostico.Atipico = False if tipo_trastorno[0][1]==0 else True
+			resultado_diagnostico.Catatonico = False if tipo_trastorno[0][2]==0 else True
+			resultado_diagnostico.save()
+
 			resultados = {
 				'Suicidio': False if suicidio_diagnostico==0 else True,
 				'Depresion': False if trastorno[0][0]==0 else True,
