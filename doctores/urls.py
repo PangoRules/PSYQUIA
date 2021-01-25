@@ -26,4 +26,5 @@ urlpatterns = [
 
     path('doc/get_datos_paciente',views.docGetDatosPaciente),
     path('doc/editar_paciente',views.docEditarPaciente),
+    path('doc/get_test_beck', views.docGetTestBeck),
 ]

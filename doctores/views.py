@@ -9,9 +9,17 @@ from scipy import stats
 from keras.models import load_model
 from account.decorators import not_authenticated
 from django.db.models import Q
+from django.core import serializers
 import json
 
 # Create your views here.
+
+@not_authenticated
+def docGetTestBeck(request):
+	id_result_beck = json.loads(request.body)
+	id_test_beck = ResultadoDiagnostico.objects.filter(id=id_result_beck).values("beck_id")
+	beck = list(Beck.objects.filter(id=id_test_beck[0]['beck_id']).values())
+	return JsonResponse({'data':beck})
 
 @not_authenticated
 def docGetDatosPaciente(request):
@@ -51,6 +59,7 @@ def docDashboard(request):
 	total_casos_depresion_distimia = ResultadoDiagnostico.objects.filter(Q(Distimia=True)|Q(Depresion=True),beck__paciente__doctor__id=current_user.id).count()
 	total_casos = ResultadoDiagnostico.objects.filter(beck__paciente__doctor__id=current_user.id).count()
 	formEditarPaciente = forms.RegistrarPacienteForm()
+	formTestBeck = forms.RegistrarTestBeckForm()
 
 	cabeceras = ['Nombre', 'Edad', 'Último Grado de Estudios', 'Ocupación', 'Nivel Económico', 'Correo Electrónico']
 	cabecerasDiagnosticos = ['Nombre', 'Fecha Diagnostico', 'Depresión', 'Distimia']
@@ -58,7 +67,7 @@ def docDashboard(request):
 	context={'cabeceras':cabeceras,'pacientes':pacientes, 'total_casos_depresion_distimia':total_casos_depresion_distimia, 
 	'total_casos':total_casos, 'cabecerasDiagnosticos':cabecerasDiagnosticos,
 	'resultadosDiagnosticoGeneral':resultadosDiagnosticoGeneral,'resultadosDiagnosticoDepresivoDistimico':resultadosDiagnosticoDepresivoDistimico,
-	'cabecerasDiagnosticosDepresivoDistimico':cabecerasDiagnosticosDepresivoDistimico, 'formEditarPaciente':formEditarPaciente}
+	'cabecerasDiagnosticosDepresivoDistimico':cabecerasDiagnosticosDepresivoDistimico, 'formEditarPaciente':formEditarPaciente, 'formTestBeck':formTestBeck,}
 	return render(request, "doctor/dashboard.html",context)
 
 def docTest(request):

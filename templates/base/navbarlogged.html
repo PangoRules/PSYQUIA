@@ -5,7 +5,7 @@
 		{% if user.is_authenticated %}
 		    <a class="navbar-brand" href="{% url 'DocDashboard' %}"><img style="width: 5rem!important; height: 4rem!important;" src="{% static 'img/navbarItems/LogoSNLetras.png' %}" width="90" height="90" alt="Logo oficial PSYQUIA"><img src="{% static 'img/navbarItems/slogan.png' %}" width="180" height="50" alt="Slogan oficial PSYQUIA"></a>
         {% else %}
-            <a class="navbar-brand" href="{% url 'PaginaInicioAnonimo' %}"><img style="width: 5rem!important; height: 4rem!important;" src="{% static 'img/navbarItems/LogoSNLetras.png' %}" width="90" height="90" alt="Logo oficial PSYQUIA"><img src="{% static 'img/navbarItems/slogan.png' %}" width="180" height="50" alt="Slogan oficial PSYQUIA"></a>
+            <a class="navbar-brand" href="{% url 'PaginaFormIniciarSesion' %}"><img style="width: 5rem!important; height: 4rem!important;" src="{% static 'img/navbarItems/LogoSNLetras.png' %}" width="90" height="90" alt="Logo oficial PSYQUIA"><img src="{% static 'img/navbarItems/slogan.png' %}" width="180" height="50" alt="Slogan oficial PSYQUIA"></a>
         {% endif %}
 		<button class="btn btn-link btn-sm order-lg-0" style="margin-left: 3rem;" id="sidebarToggle" href="#"><i class="fas fa-bars" style="font-size:1.5rem!important"></i></button>
 		<!-- Navbar Search-->

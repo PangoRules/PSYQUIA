@@ -94,6 +94,7 @@
                                 {% for cabecera in cabecerasDiagnosticos %}
                                     <th>{{cabecera}}</th>
                                 {% endfor %}
+                                <th data-priority="1">Acciones</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -101,6 +102,7 @@
                                 {% for cabecera in cabecerasDiagnosticos %}
                                     <th>{{cabecera}}</th>
                                 {% endfor %}
+                                <th data-priority="1">Acciones</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -108,8 +110,17 @@
                                 <tr>
                                     <td id="{{resultado.id}}">{{resultado.beck.paciente.name}}</td>
                                     <td>{{resultado.created_at}}</td>
-                                    <td>{{resultado.Depresion}}</td>
-                                    <td>{{resultado.Distimia}}</td>
+                                    {% if resultado.Depresion %}
+                                    <td><strong><p class="fa fa-check"></p></strong></td>
+                                    {% else %}
+                                    <td><strong><p>---------</p></strong></td>
+                                    {% endif %}
+                                    {% if resultado.Distimia %}
+                                    <td><strong><p class="fa fa-check"></p></strong></td>
+                                    {% else %}
+                                    <td><strong><p>---------</p></strong></td>
+                                    {% endif %}
+                                    <td><a href="#." onclick="ver_testbeck('{{resultado.id}}')"><i class="fa fa-info-circle" data-toggle="tooltip" title="Ver test de beck" aria-hidden="true"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -130,6 +141,7 @@
                                 {% for cabecera in cabecerasDiagnosticosDepresivoDistimico %}
                                     <th>{{cabecera}}</th>
                                 {% endfor %}
+                                <th data-priority="1">Acciones</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -137,6 +149,7 @@
                                 {% for cabecera in cabecerasDiagnosticosDepresivoDistimico %}
                                     <th>{{cabecera}}</th>
                                 {% endfor %}
+                                <th data-priority="1">Acciones</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -167,6 +180,7 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
+                                    <td><a href="#." onclick="ver_testbeck('{{resultado.id}}')"><i class="fa fa-info-circle" data-toggle="tooltip" title="Ver test de beck" aria-hidden="true"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -175,7 +189,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Éxito Realizar Test de Beck-->
+    <!-- modalEditarPaciente-->
     <div class="modal fade" id="modalEditarPaciente" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal Editar Paciente" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -259,6 +273,180 @@
                             <button type="submit" class="btn btn-primary">Aceptar</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modalVerTest-->
+    <div class="modal fade" id="modalVerTest" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal Ver Test" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="max-width: 50%;">
+            <div class="modal-content">
+                <div class="modal-header d-block text-center">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Ver Test de Beck</h5>
+                </div>
+                <div class="modal-body bg-light">
+                    <form id="verTestBeckForm" action="" method="POST">
+                        <h4>Paciente Diagnosticado</h1>
+                        <div class="form-row justify-content-center">
+                            <div class="form-group col-md-12 col-lg-6">
+                                <select name="paciente_id" class="form-control" required="" id="id_paciente">
+                                    <option value="" selected="">---------</option>
+                                    {% for pacientes in pacientes %}
+                                        <option value="{{pacientes.id}}">{{pacientes.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <h6>Datos Especificos</h6>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="tristeza">Tristeza</label>
+                                {{formTestBeck.tristeza}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="pesimismo">Pesimismo</label>
+                                {{formTestBeck.pesimismo}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="fracaso">Fracaso</label>
+                                {{formTestBeck.fracaso}}
+                            </div>  
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="perdida_placer">Pérdida de Placer</label>
+                                {{formTestBeck.placer}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="sentimiento_culpa">Sentimientos de Culpa</label>
+                                {{formTestBeck.culpa}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="sentimiento_castigo">Sentimientos de Castigo</label>
+                                {{formTestBeck.castigo}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="disconformidad_unomismo">Disconformidad con uno mismo</label>
+                                {{formTestBeck.disconformidad}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="autocritica">Autocrítica</label>
+                                {{formTestBeck.autocritica}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="llanto">Llanto</label>
+                                {{formTestBeck.llanto}}
+                            </div> 
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="agitacion">Agitación</label>
+                                {{formTestBeck.agitacion}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="perdida_interes">Pérdida de Interés</label>
+                                {{formTestBeck.interes}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="indecision">Indecisión</label>
+                                {{formTestBeck.indecision}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="desvalorizacion">Desvalorización</label>
+                                {{formTestBeck.desvalorizacion}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="perdida_energia">Pérdida de Energía</label>
+                                {{formTestBeck.energia}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="cambios_habi_sueños">Cambios en los Hábitos de Sueño</label>
+                                {{formTestBeck.sueño}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="irritabilidad">Irritabilidad</label>
+                                {{formTestBeck.irritabilidad}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="cambios_apetito">Cambios en el Apetito</label>
+                                {{formTestBeck.apetito}}
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="dificultad_concentracion">Dificultad de Concentración</label>
+                                {{formTestBeck.concentracion}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="cansancio">Cansancio o Fatiga</label>
+                                {{formTestBeck.fatiga}}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="perdida_interes_sexo">Pérdida de Interés en el Sexo</label>
+                                {{formTestBeck.sexo}}
+                            </div>
+                        </div>
+                        <h4>Datos Adicionales Recientes en la Vida del Paciente</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-check">
+                                    {{formTestBeck.vivir_solo}}
+                                    <label class="form-check-label" for="id_vivir_solo">Vivo Solo</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.conflicto_familiar}}
+                                    <label class="form-check-label" for="id_conflicto_familiar">Conflicto Familiar Severo</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.muerte_ser_querido}}
+                                    <label class="form-check-label" for="id_muerte_ser_querido">Muerte de un Ser Querido</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.presion_redes_sociales}}
+                                    <label class="form-check-label" for="id_presion_redes_sociales">Presion en Redes Sociales</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.dias_festivos}}
+                                    <label class="form-check-label" for="id_dias_festivos">Días Festivos Recientes</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.divorcio_padres}}
+                                    <label class="form-check-label" for="id_divorcio_padres">Divorcios de los Padres</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-check">
+                                    {{formTestBeck.perdida_trabajo}}
+                                    <label class="form-check-label" for="id_perdida_trabajo">Perdida de Trabajo</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.conflicto_laboral}}
+                                    <label class="form-check-label" for="id_conflicto_laboral">Conflicto Laboral Severo</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.separacion_conyugal}}
+                                    <label class="form-check-label" for="id_separacion_conyugal">Separacion Conyugal</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.abuso_sexual}}
+                                    <label class="form-check-label" for="id_abuso_sexual">Abuso Sexual</label>
+                                </div>
+                                <div class="form-check">
+                                    {{formTestBeck.conflicto_amoroso}}
+                                    <label class="form-check-label" for="id_conflicto_amoroso">Conflicto Amoroso</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group mt-4 mb-0 text-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                    </div>
                 </div>
             </div>
         </div>

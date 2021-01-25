@@ -23,7 +23,6 @@ from django.shortcuts import render, redirect
 urlpatterns = [
     path('admin/logout/', lambda request: redirect('/cerrar_sesion/', permanent=False)),
     path('admin/', admin.site.urls),
-    path('', views.home, name="PaginaInicioAnonimo"),
     path('', include('account.urls')),
     path('', include('administradores.urls')),
     path('', include('doctores.urls')),
